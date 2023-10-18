@@ -1,0 +1,15 @@
+.light-mode {
+  background-color: white;
+  color: black;
+}
+
+.dark-mode {
+  background-color: #232222;
+  color: #ffffff99;
+}
+
+.App {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: relative;
+}
