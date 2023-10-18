@@ -4,9 +4,25 @@ import './index.css';
 import IconFacebook from '../../image/login/icon-facebook.png';
 import IconMail from '../../image/login/icon-mail.png';
 import IconPhone from '../../image/login/icon-phone.png';
+import { SignIn, createUsers } from '../../Api/login';
+import { useDispatch } from 'react-redux';
+import { SnackbarActions } from '../../redux/snackbar';
+import { useNavigate } from 'react-router-dom';
+
+const Cookies = require('js-cookie');
 
 export default function Login() {
     const [isLoginForm, setIsLoginForm] = useState(true);
+    const [Inusername, setInUsername] = useState('');
+    const [Inpassword, setInPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [cfpassword, setCfpassword] = useState('');
+    const [fullname, setFullname] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLoginClick = () => {
         setIsLoginForm(true);
@@ -15,6 +31,43 @@ export default function Login() {
     const handleSignupClick = () => {
         setIsLoginForm(false);
     };
+
+
+    const handleSignIn = async () => {
+        try {
+            let result = await SignIn({
+                "username": Inusername,
+                "password": Inpassword,
+            });
+            Cookies.set('modish', result.accessToken, { expires: 1, secure: true, sameSite: 'strict', path: '/' });
+            dispatch(SnackbarActions.OnSnackbar({ mode: true, content: "Login success", type: "success" }));
+            setTimeout(()=> {
+                navigate('../home');
+            }, 1000);
+        } catch (error) {
+            dispatch(SnackbarActions.OnSnackbar({ mode: true, content: error, type: "info" }));
+        }
+    };
+
+    const handleSignUp = async () => {
+        try {
+            let result = await createUsers({
+                username: username,
+                password: password,
+                email: email,
+                fullname: fullname,
+                cfpassword: cfpassword,
+                isAdmin: false,
+                status: true
+            });
+            dispatch(SnackbarActions.OnSnackbar({ mode: true, content: "Create Account success", type: "success" }));
+            setTimeout(()=> {
+                setIsLoginForm(true);
+            }, 500);
+        } catch (error) {
+            dispatch(SnackbarActions.OnSnackbar({ mode: true, content: error, type: "info" }));
+        }
+    }
 
     return (
         <div className="wrapper">
@@ -45,7 +98,7 @@ export default function Login() {
 
                     </div>
                     <div className='note-extension'>
-                        <hr/>
+                        <hr />
                         <p>Sign In with</p>
                     </div>
                 </div>
@@ -54,35 +107,38 @@ export default function Login() {
                     {isLoginForm ? (
                         <form action="#" className="login">
                             <div className="field">
-                                <input type="text" placeholder="Email Address" required />
+                                <input type="text" placeholder="Email Or Username" value={Inusername} onChange={(e) => setInUsername(e.target.value)} required />
                             </div>
                             <div className="field">
-                                <input type="password" placeholder="Password" required />
+                                <input type="password" placeholder="Password" value={Inpassword} onChange={(e) => setInPassword(e.target.value)} required />
                             </div>
                             <div className="pass-link"><a href="#">Forgot password?</a></div>
                             <div className="field btn">
                                 <div className="btn-layer"></div>
-                                <input type="submit" value="Login" />
+                                <input type="submit" value="Login" onClick={handleSignIn} />
                             </div>
                             <div className="signup-link">Not a member? <a href="#">Signup now</a></div>
                         </form>
                     ) : (
                         <form action="#" className="signup">
                             <div className="field">
-                                <input type="text" placeholder="Email Address" required />
+                                <input type="text" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             </div>
                             <div className="field">
-                                <input type="text" placeholder="Full Name" required />
+                                <input type="text" placeholder="Full Name" value={fullname} onChange={(e) => setFullname(e.target.value)}  required />
                             </div>
                             <div className="field">
-                                <input type="password" placeholder="Password" required />
+                                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}  required />
                             </div>
                             <div className="field">
-                                <input type="password" placeholder="Confirm password" required />
+                                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}  required />
+                            </div>
+                            <div className="field">
+                                <input type="password" placeholder="Confirm password" value={cfpassword} onChange={(e) => setCfpassword(e.target.value)}  required />
                             </div>
                             <div className="field btn">
                                 <div className="btn-layer"></div>
-                                <input type="submit" value="Signup" />
+                                <input type="submit" value="Signup" onClick={handleSignUp}/>
                             </div>
                         </form>
                     )}
