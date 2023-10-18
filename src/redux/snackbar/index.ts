@@ -8,14 +8,14 @@ const SnackbarSlice = createSlice({
         type: '', // variant could be success, error, warning, info, or default
     },
     reducers: {
-        OnSnackbar(state: any, action: any) {
+        OnSnackbar(state, action) {
             return {
                 ...state,
                 mode: action.payload.mode,
                 content: action.payload.content,
                 type: action.payload.type,
             }
-        }
+        },
     },
 })
 
