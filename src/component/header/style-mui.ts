@@ -1,16 +1,16 @@
 import { Box } from "@mui/material";
 import { styled as muiStyled } from "@mui/system";
 
-export const StyleHeader = muiStyled("header")(({ theme }) => ({
-  display: "flex",
-  position: "sticky",
-  top: 0,
-  left: 0,
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "-webkit-fill-available",
-  padding: "20px 120px",
-  background: "#ffffff",
+export const StyleHeader = muiStyled('header')(({ theme }) => ({
+    display: 'flex',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '-webkit-fill-available',
+    padding: '20px 120px',
+    background: '#ffffff',
 }));
 
 export const StyleText = muiStyled("a")(({ theme }) => ({
@@ -55,3 +55,14 @@ export const StyleCart = muiStyled("button")(({ theme }) => ({
     borderRadius: "50%",
   },
 }));
+
+export const StyleBoxLogo = muiStyled(Box)(({ theme }) => ({
+  width: '120px'
+}));
+
+export const StyleImgLogo = muiStyled('img')(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+}));
+
+

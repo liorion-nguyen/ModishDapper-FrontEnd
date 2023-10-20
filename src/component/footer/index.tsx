@@ -11,7 +11,7 @@ import Tiktok from '../../images/home/footer/icon-tiktok.svg';
 import Twitter from '../../images/home/footer/icon-twitter.svg';
 import Youtube from '../../images/home/footer/icon-youtube.svg';
 import Payment from '../../images/home/footer/icon-payment.svg';
-import { StyleHref, StyleContact, StyleFooter, StyleIconContact1, StyleText, StyleHref2, StyleTitle, StyleExplain, StyleBox25 } from "./style-mui";
+import { StyleHref, StyleContact, StyleFooter, StyleIconContact1, StyleText, StyleHref2, StyleTitle, StyleExplain, StyleBox25, StyleForm, StyleInputForm, StyleButtonForm, StyleBoxForm, StyleH3Form, StylePForm, StyleBoxTextForm } from "./style-mui";
 
 export default function Footer() {
     const contactLine1 = [
@@ -122,7 +122,18 @@ export default function Footer() {
         }
     ]
     return (
-        <StyleFooter>
+        <>
+            <StyleForm method='post'>
+                <StyleBoxTextForm>
+                    <StyleH3Form>Theo dõi Moodish</StyleH3Form>
+                    <StylePForm>Giảm ngay 10% cho hóa đơn đầu tiên.</StylePForm>
+                </StyleBoxTextForm>
+                <StyleBoxForm>
+                    <StyleInputForm type="email" placeholder="Nhập ngay email" />
+                    <StyleButtonForm>Đặt mua</StyleButtonForm>
+                </StyleBoxForm>
+            </StyleForm>
+            <StyleFooter>
                 <StyleContact>
                     {
                         contactLine1.map((contact) => (
@@ -139,7 +150,7 @@ export default function Footer() {
                         contactLine2.map((contact) => (
                             <StyleBox25>
                                 <StyleTitle>{contact.title}</StyleTitle>
-                                <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                     {
                                         contact.content.map((content) => (
                                             <Box>
@@ -153,9 +164,9 @@ export default function Footer() {
                     }
                     <StyleBox25>
                         <StyleTitle>Mạng xã hội</StyleTitle>
-                        <Box sx={{display: 'flex', gap: '20px'}}>
+                        <Box sx={{ display: 'flex', gap: '20px' }}>
                             {
-                                social.map((icon)=> (
+                                social.map((icon) => (
                                     <a href={icon.href}>
                                         <img src={icon.icon} />
                                     </a>
@@ -177,9 +188,11 @@ export default function Footer() {
                         <StyleExplain>Trong sổ đăng ký kinh doanh từ ngày 19 tháng 10 năm 2023, số đăng ký 256476, UNP 14886482</StyleExplain>
                     </StyleBox25>
                     <StyleBox25>
-                        <img src={Payment}/>
+                        <img src={Payment} />
                     </StyleBox25>
                 </StyleContact>
-        </StyleFooter>
+            </StyleFooter>
+        </>
+
     );
 }

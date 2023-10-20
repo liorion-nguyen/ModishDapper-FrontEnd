@@ -1,0 +1,44 @@
+.txt-line {
+    text-decoration: line-through;
+    font-weight: 400 !important;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.slick-arrow {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.deal .slick-prev {
+    background: #DBE5F1 !important;
+}
+
+.slick-prev:hover {
+    background: #DBE5F1;
+}
+
+.deal .slick-next {
+    background: #212429 !important;
+}
+
+.slick-next:hover {
+    background: #212429;
+}
+
+.deal .slick-track {
+    display: flex;
+    gap: 20px;
+}
+
+.slick-dots {
+    display: none !important;
+}
+
+.slide .slick-next, .slide .slick-prev {
+    display: none !important;
+}
