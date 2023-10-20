@@ -3,7 +3,8 @@ import { Box } from "@mui/material";
 import User from '../../images/home/header/icon-user.svg';
 import Heart from '../../images/home/header/icon-heart.svg';
 import Cart from '../../images/home/header/icon-cart.svg';
-import { StyleCart, StyleHeader, StyleListIcon, StyleListText, StyleText } from "./style-mui";
+import Logo from '../../images/home/header/logo.svg';
+import { StyleBoxLogo, StyleCart, StyleHeader, StyleImgLogo, StyleListIcon, StyleListText, StyleText } from "./style-mui";
 
 export default function Header() {
     const items = [
@@ -26,9 +27,9 @@ export default function Header() {
     ]
     return (
         <StyleHeader>
-            <Box>
-                <img src="https://aristino.com/Data/upload/imagess/Logo/logo%20Aristino%20Final%202023%20(2).png" />
-            </Box>
+            <StyleBoxLogo>
+                <StyleImgLogo src={Logo} />
+            </StyleBoxLogo>
 
             <StyleListText>
                 {

@@ -80,3 +80,62 @@ export const StyleExplain = muiStyled('p')(({ theme }) => ({
 export const StyleBox25 = muiStyled(Box)(({ theme }) => ({
     width: '25%'
 }));
+
+export const StyleForm = muiStyled('form')(({ theme }) => ({
+    display: 'flex',
+    width: '100%',
+    padding: '50px 120px',
+    justifyContent: 'space-between',
+    borderTop: '1px solid #B6B6B6'
+}));
+
+
+export const StyleH3Form = muiStyled('h3')(({ theme }) => ({
+    fontFamily: 'Montserrat',
+    fontSize: '24px',
+    fontWeight: '700',
+    color: '#212429',
+}));
+
+export const StyleBoxTextForm = muiStyled(Box)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px'
+}));
+
+export const StylePForm = muiStyled('p')(({ theme }) => ({
+    fontFamily: 'Montserrat',
+    fontSize: '16px',
+    fontWeight: '400',
+    color: '#212429',
+}));
+
+export const StyleBoxForm = muiStyled(Box)(({ theme }) => ({
+    display: 'flex',
+    gap: '20px'
+}));
+
+export const StyleInputForm = muiStyled('input')(({ theme }) => ({
+    width: '384px',
+    height: '48px',
+    borderRadius: '48px',
+    border: '1px solid #B6B6B6',
+    padding: '0 15px'
+}));
+
+export const StyleButtonForm = muiStyled('button')(({ theme }) => ({
+    width: '178px',
+    height: '48px',
+    borderRadius: '48px',
+    background: '#212429',
+    fontFamily: 'Montserrat',
+    fontSize: '16px',
+    fontWeight: '500',
+    color: '#FFFFFF',
+    border: 'none'
+}));
+
+
+
+
+

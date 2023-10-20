@@ -10,7 +10,8 @@ export const StyleHeader = muiStyled('header')(({ theme }) => ({
     alignItems: 'center',
     width: '-webkit-fill-available',
     padding: '20px 120px',
-    background: '#ffffff'
+    background: '#ffffff',
+    zIndex: '1000'
 }));
 
 export const StyleText = muiStyled('a')(({ theme }) => ({
@@ -54,6 +55,15 @@ export const StyleCart = muiStyled('button')(({ theme }) => ({
         color: '#000000',
         borderRadius: '50%'
     }
+}));
+
+export const StyleImgLogo = muiStyled('img')(({ theme }) => ({
+    width: '100%',
+    height: '100%'
+}));
+
+export const StyleBoxLogo = muiStyled(Box)(({ theme }) => ({
+    width: '100px',
 }));
 
 
