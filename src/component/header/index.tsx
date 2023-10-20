@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 
-import User from '../../image/home/header/icon-user.svg';
-import Heart from '../../image/home/header/icon-heart.svg';
-import Cart from '../../image/home/header/icon-cart.svg';
+import User from '../../images/home/header/icon-user.svg';
+import Heart from '../../images/home/header/icon-heart.svg';
+import Cart from '../../images/home/header/icon-cart.svg';
 import { StyleCart, StyleHeader, StyleListIcon, StyleListText, StyleText } from "./style-mui";
 
 export default function Header() {
@@ -27,7 +27,7 @@ export default function Header() {
     return (
         <StyleHeader>
             <Box>
-                <img src="https://aristino.com/Data/upload/images/Logo/logo%20Aristino%20Final%202023%20(2).png" />
+                <img src="https://aristino.com/Data/upload/imagess/Logo/logo%20Aristino%20Final%202023%20(2).png" />
             </Box>
 
             <StyleListText>

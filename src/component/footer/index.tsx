@@ -1,16 +1,16 @@
 import { Box } from "@mui/material";
 
-import Mail from '../../image/home/footer/icon-mail.svg';
-import Phone from '../../image/home/footer/icon-phone.svg';
-import Return from '../../image/home/footer/icon-return.svg';
-import Truck from '../../image/home/footer/icon-truck.svg';
-import Facebook from '../../image/home/footer/icon-facebook.svg';
-import Instagram from '../../image/home/footer/icon-instagram.svg';
-import Telegram from '../../image/home/footer/icon-telegram.svg';
-import Tiktok from '../../image/home/footer/icon-tiktok.svg';
-import Twitter from '../../image/home/footer/icon-twitter.svg';
-import Youtube from '../../image/home/footer/icon-youtube.svg';
-import Payment from '../../image/home/footer/icon-payment.svg';
+import Mail from '../../images/home/footer/icon-mail.svg';
+import Phone from '../../images/home/footer/icon-phone.svg';
+import Return from '../../images/home/footer/icon-return.svg';
+import Truck from '../../images/home/footer/icon-truck.svg';
+import Facebook from '../../images/home/footer/icon-facebook.svg';
+import Instagram from '../../images/home/footer/icon-instagram.svg';
+import Telegram from '../../images/home/footer/icon-telegram.svg';
+import Tiktok from '../../images/home/footer/icon-tiktok.svg';
+import Twitter from '../../images/home/footer/icon-twitter.svg';
+import Youtube from '../../images/home/footer/icon-youtube.svg';
+import Payment from '../../images/home/footer/icon-payment.svg';
 import { StyleHref, StyleContact, StyleFooter, StyleIconContact1, StyleText, StyleHref2, StyleTitle, StyleExplain, StyleBox25 } from "./style-mui";
 
 export default function Footer() {
