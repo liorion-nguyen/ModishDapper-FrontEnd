@@ -3,7 +3,7 @@ import { styled as muiStyled } from '@mui/system';
 
 export const StyleFooter = muiStyled('footer')(({ theme }) => ({
     background: '#212429',
-    width: '100vw',
+    width: '100%',
     padding: '60px 120px',
     gap: '40px',
     display: 'flex',
