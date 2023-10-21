@@ -339,7 +339,7 @@ export function New() {
                             <StyleNameNew>{newItem.name}</StyleNameNew>
                             <StyleBoxPriceNew>
                                 <StylePriceNew>{newItem.price}</StylePriceNew>
-                                <StyleDiscountNew>{newItem.discount}</StyleDiscountNew>
+                                {newItem.discount > 0 && <StyleDiscountNew>{newItem.discount}% GIẢM</StyleDiscountNew>}
                             </StyleBoxPriceNew>
                         </StyleGridNew>
                     ))
