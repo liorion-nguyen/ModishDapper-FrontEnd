@@ -5,7 +5,10 @@ import Catalog from "./page/catalog/index.d";
 import Home from "./page/home/index.d";
 import Cart from "./page/cart";
 import Product from "./page/product";
+<<<<<<< HEAD
 import CheckOut from "./page/checkout";
+=======
+>>>>>>> 80bef9dee0a5a6ca8dd41da8fcb2dfdf982acd04
 
 function App() {
   return (
