@@ -1,7 +1,7 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
-import { StyleAddMinuProduct, StyleBoxBottomPrice, StyleBoxChosse, StyleBoxContentProduct, StyleBoxInpTransport, StyleBoxLocation, StyleBoxParaProduct, StyleBoxSpaceBetween, StyleBoxTopPrice, StyleButtonPrice, StyleCard, StyleChosseTransport, StyleContactPrice, StyleContebtParaProduct, StyleFormCodePrice, StyleFormTransport, StyleGridPrice, StyleHr, StyleHrPrice, StyleIconNextPrice, StyleImgProduct, StyleInpHalfTransport, StyleInputCodePrice, StyleInputTransport, StyleItemProduct, StyleNameProduct, StylePBold16, StylePLocation, StylePRegular16, StylePTitlePrice, StyleParaProduct, StylePriceProduct, StyleSettingProduct, StyleTextBoldPrice, StyleTextParaProduct, StyleTextPrice, StyleTitle, StyleTrueChosseTransport } from "./style-mui";
+import { StyleAddMinuProduct, StyleBoxBottomPrice, StyleBoxChosse, StyleBoxContentProduct, StyleBoxInpTransport, StyleBoxLocation, StyleBoxParaProduct, StyleBoxSpaceBetween, StyleBoxTopPrice, StyleBreadcrumbs, StyleButtonPrice, StyleCard, StyleChosseTransport, StyleContactPrice, StyleContebtParaProduct, StyleFormCodePrice, StyleFormTransport, StyleGridPrice, StyleHr, StyleHrPrice, StyleIconNextPrice, StyleImgProduct, StyleInpHalfTransport, StyleInputCodePrice, StyleInputTransport, StyleItemProduct, StyleNameProduct, StylePBold16, StylePLocation, StylePRegular16, StylePTitlePrice, StyleParaProduct, StylePriceProduct, StyleSettingProduct, StyleTextBoldPrice, StyleTextParaProduct, StyleTextPrice, StyleTitle, StyleTrueChosseTransport } from "./style-mui";
 
 import TransportIcon from '../../images/cart/transport/icon-transport.svg';
 import EmailIcon from '../../images/cart/transport/icon-email.svg';
@@ -9,11 +9,13 @@ import Add from '@mui/icons-material/Add';
 import Minu from '@mui/icons-material/Remove';
 import Delete from '@mui/icons-material/DeleteOutlineOutlined';
 import Location from '@mui/icons-material/FmdGoodOutlined';
-
+import { Link } from '@mui/material';
 
 import './index.css';
+import { useNavigate } from "react-router-dom";
 
 export function ProductInCart() {
+    const navigate = useNavigate();
     const products = [
         {
             name: 'Quần jean dài thẳng vừa vặn màu trắng',
@@ -44,8 +46,23 @@ export function ProductInCart() {
     const handleTotal = () => {
         return handlePriceProduct() + 10000;
     }
+
+    function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+        event.preventDefault();
+        console.info('You clicked a breadcrumb.');
+    }
+    const handleCheckout = () => {
+        navigate('./checkout');
+    };
+
     return (
         <Box>
+            <StyleBreadcrumbs className="f-sz-12" aria-label="breadcrumb">
+                <Link underline="hover" color="inherit" href="./">
+                    Home
+                </Link>
+                <Typography className="f-sz-12" color="text.primary">Card</Typography>
+            </StyleBreadcrumbs>
             <StyleTitle>Cart</StyleTitle>
             <Grid container spacing={4}>
                 <Grid item xs={8.5}>
@@ -122,7 +139,7 @@ export function ProductInCart() {
                             <StyleTextBoldPrice>tổng cộng</StyleTextBoldPrice>
                             <StyleTextBoldPrice>{handleTotal()} VNĐ</StyleTextBoldPrice>
                         </StyleBoxSpaceBetween>
-                        <StyleButtonPrice>Đi đến thanh toán</StyleButtonPrice>
+                        <StyleButtonPrice onClick={handleCheckout}>Đi đến thanh toán</StyleButtonPrice>
                     </StyleBoxBottomPrice>
                 </StyleGridPrice>
             </Grid>
@@ -137,11 +154,11 @@ export function Transport() {
             <StyleFormTransport method='post'>
                 <StyleBoxChosse>
                     <StyleTrueChosseTransport>
-                        <img src={TransportIcon}/>
+                        <img src={TransportIcon} />
                         <StylePRegular16>Chuyển phát nhanh</StylePRegular16>
                     </StyleTrueChosseTransport>
                     <StyleChosseTransport>
-                        <img src={EmailIcon}/>
+                        <img src={EmailIcon} />
                         <StylePRegular16>Thư từ</StylePRegular16>
                     </StyleChosseTransport>
                 </StyleBoxChosse>

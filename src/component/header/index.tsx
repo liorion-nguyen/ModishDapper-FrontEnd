@@ -5,12 +5,14 @@ import Heart from '../../images/home/header/icon-heart.svg';
 import Cart from '../../images/home/header/icon-cart.svg';
 import Logo from '../../images/home/header/logo.svg';
 import { StyleBoxLogo, StyleCart, StyleHeader, StyleImgLogo, StyleListIcon, StyleListText, StyleText } from "./style-mui";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const navigate = useNavigate();
     const items = [
         {
             name: 'Trang chủ',
-            href: '',
+            href: '../',
         },
         {
             name: 'Flash Sale',
@@ -25,6 +27,10 @@ export default function Header() {
             href: '',
         },
     ]
+
+    const handleCart = () => {
+        navigate('../cart');
+    }
     return (
         <StyleHeader>
             <StyleBoxLogo>
@@ -47,8 +53,8 @@ export default function Header() {
                     <img src={Heart} />
                 </Box>
                 <Box sx={{position: 'relative'}}>
-                    <StyleCart data-count="3">
-                        <img  src={Cart} />
+                    <StyleCart data-count="3" onClick={handleCart}>
+                        <img src={Cart} />
                     </StyleCart>
                 </Box>
             </StyleListIcon>
