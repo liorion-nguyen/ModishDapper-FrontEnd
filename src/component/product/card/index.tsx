@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { getProduct } from "../../../Api/product";
 import { useParams } from "react-router-dom";
-import Heart from "../../../images/product/icon-love-on.svg";
 import HeartOff from "../../../images/product/icon-love.svg";
+import Shoping from "../../../images/product/cart-4.svg";
+import Transport from "../../../images/product/iconoir_delivery.svg";
+import Car from "../../../images/product/iconoir_delivery-truck.svg";
+import Share from "../../../images/product/ant-design_share-alt-outlined.svg";
+
 import { ItemTransportGrid, SizeProductGrid, TransportGrid } from "./style";
 
 export default function Card({ product }: any) {
@@ -53,7 +57,7 @@ export default function Card({ product }: any) {
                       <img src={HeartOff} alt="error" />
                     </Grid>
                     <Grid sx={{ padding: "0 5px" }}>
-                      <img src={Heart} alt="error" />
+                      <img src={Share} alt="error" />
                     </Grid>
                   </Grid>
                 </Grid>
@@ -102,11 +106,11 @@ export default function Card({ product }: any) {
                   }}
                 >
                   <TransportGrid>
-                    <img src={Heart} alt="" />
+                    <img src={Car} alt="" />
                     <ItemTransportGrid>text</ItemTransportGrid>
                   </TransportGrid>
                   <TransportGrid>
-                    <img src={Heart} alt="" />
+                    <img src={Transport} alt="" />
                     <ItemTransportGrid>text</ItemTransportGrid>
                   </TransportGrid>
                 </Grid>
@@ -152,7 +156,7 @@ export default function Card({ product }: any) {
                         padding: "10px",
                       }}
                     >
-                      <img src={Heart} alt="" />
+                      <img src={Shoping} alt="" />
                       <ItemTransportGrid>text</ItemTransportGrid>
                     </TransportGrid>
                   </Grid>
