@@ -123,7 +123,7 @@ export default function Footer() {
     ]
     return (
         <>
-            <StyleForm method='post'>
+            <StyleForm method='post' className="form-buy">
                 <StyleBoxTextForm>
                     <StyleH3Form>Theo dõi Moodish</StyleH3Form>
                     <StylePForm>Giảm ngay 10% cho hóa đơn đầu tiên.</StylePForm>

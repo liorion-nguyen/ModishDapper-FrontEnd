@@ -24,7 +24,7 @@ export const StyleImgNav = muiStyled('img')(({ theme }) => ({
 }));
 
 export const StyleMain = muiStyled('main')(({ theme }) => ({
-    marginTop: '80px',
+    margin: '80px 0',
     padding: '40px 120px',
     display: 'flex',
     flexDirection: 'column',

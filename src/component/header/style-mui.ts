@@ -11,6 +11,7 @@ export const StyleHeader = muiStyled('header')(({ theme }) => ({
     width: '-webkit-fill-available',
     padding: '20px 120px',
     background: '#ffffff',
+    zIndex: '1000'
 }));
 
 export const StyleText = muiStyled("a")(({ theme }) => ({
