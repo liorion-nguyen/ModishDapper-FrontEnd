@@ -1,17 +1,21 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { styled as muiStyled } from "@mui/system";
 
 export const StyleHeader = muiStyled("header")(({ theme }) => ({
-  display: "flex",
   position: "sticky",
   top: 0,
   left: 0,
-  justifyContent: "space-between",
   alignItems: "center",
   width: "-webkit-fill-available",
   padding: "20px 120px",
   background: "#ffffff",
   zIndex: "1000",
+}));
+export const Container = muiStyled(Grid)(({ theme }) => ({
+  maxWidth: "1440px",
+  margin: "0 auto",
+  display: "flex",
+  justifyContent: "space-between",
 }));
 
 export const StyleText = muiStyled("a")(({ theme }) => ({
