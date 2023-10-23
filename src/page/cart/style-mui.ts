@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Breadcrumbs, Grid } from '@mui/material';
 import { styled as muiStyled } from '@mui/system';
 import Next from '@mui/icons-material/NavigateNext';
 
@@ -263,7 +263,7 @@ export const StyleInputTransport = muiStyled('input')(({ theme }) => ({
 }));
 
 export const StyleInpHalfTransport = muiStyled(StyleInputTransport)(({ theme }) => ({
-    width: '47%',
+    width: '48%',
 }));
 
 export const StyleBoxLocation = muiStyled(StyleBoxRow)(({ theme }) => ({
@@ -289,3 +289,8 @@ export const StyleFormTransport = muiStyled('form')(({ theme }) => ({
     flexDirection: 'column',
     gap: '30px',
 }));
+
+export const StyleBreadcrumbs = muiStyled(Breadcrumbs)(({ theme }) => ({
+    padding: '20px 0'
+}));
+
