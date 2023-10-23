@@ -28,6 +28,8 @@ import {
   StyleH3Form,
   StylePForm,
   StyleBoxTextForm,
+  Container,
+  ContainerMoodish,
 } from "./style-mui";
 
 export default function Footer() {
@@ -140,78 +142,82 @@ export default function Footer() {
   ];
   return (
     <>
-      <StyleForm method="post" className="form-buy">
-        <StyleBoxTextForm>
-          <StyleH3Form>Theo dõi Moodish</StyleH3Form>
-          <StylePForm>Giảm ngay 10% cho hóa đơn đầu tiên.</StylePForm>
-        </StyleBoxTextForm>
-        <StyleBoxForm>
-          <StyleInputForm type="email" placeholder="Nhập ngay email" />
-          <StyleButtonForm>Đặt mua</StyleButtonForm>
-        </StyleBoxForm>
+      <StyleForm className="form-buy">
+        <ContainerMoodish>
+          <StyleBoxTextForm>
+            <StyleH3Form>Theo dõi Moodish</StyleH3Form>
+            <StylePForm>Giảm ngay 10% cho hóa đơn đầu tiên.</StylePForm>
+          </StyleBoxTextForm>
+          <StyleBoxForm>
+            <StyleInputForm type="email" placeholder="Nhập ngay email" />
+            <StyleButtonForm>Đặt mua</StyleButtonForm>
+          </StyleBoxForm>
+        </ContainerMoodish>
       </StyleForm>
       <StyleFooter>
-        <StyleContact>
-          {contactLine1.map((contact) => (
-            <StyleHref href={contact.href}>
-              <StyleIconContact1>
-                <img src={contact.icon} />
-              </StyleIconContact1>
-              <StyleText>{contact.content}</StyleText>
-            </StyleHref>
-          ))}
-        </StyleContact>
+        <Container>
+          <StyleContact>
+            {contactLine1.map((contact) => (
+              <StyleHref href={contact.href}>
+                <StyleIconContact1>
+                  <img src={contact.icon} />
+                </StyleIconContact1>
+                <StyleText>{contact.content}</StyleText>
+              </StyleHref>
+            ))}
+          </StyleContact>
 
-        <StyleContact>
-          {contactLine2.map((contact) => (
+          <StyleContact>
+            {contactLine2.map((contact) => (
+              <StyleBox25>
+                <StyleTitle>{contact.title}</StyleTitle>
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                >
+                  {contact.content.map((content) => (
+                    <Box>
+                      <StyleHref2 href={content.href}>
+                        {content.explain}
+                      </StyleHref2>
+                    </Box>
+                  ))}
+                </Box>
+              </StyleBox25>
+            ))}
             <StyleBox25>
-              <StyleTitle>{contact.title}</StyleTitle>
-              <Box
-                sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
-              >
-                {contact.content.map((content) => (
-                  <Box>
-                    <StyleHref2 href={content.href}>
-                      {content.explain}
-                    </StyleHref2>
-                  </Box>
+              <StyleTitle>Mạng xã hội</StyleTitle>
+              <Box sx={{ display: "flex", gap: "20px" }}>
+                {social.map((icon) => (
+                  <a href={icon.href}>
+                    <img src={icon.icon} />
+                  </a>
                 ))}
               </Box>
             </StyleBox25>
-          ))}
-          <StyleBox25>
-            <StyleTitle>Mạng xã hội</StyleTitle>
-            <Box sx={{ display: "flex", gap: "20px" }}>
-              {social.map((icon) => (
-                <a href={icon.href}>
-                  <img src={icon.icon} />
-                </a>
-              ))}
-            </Box>
-          </StyleBox25>
-        </StyleContact>
+          </StyleContact>
 
-        <StyleContact>
-          <StyleBox25>
-            <StyleExplain>© 20223 – 2023 Modish Dapper. </StyleExplain>
-            <StyleExplain>Đã đăng ký Bản quyền.</StyleExplain>
-          </StyleBox25>
-          <StyleBox25>
-            <StyleExplain>
-              Công ty trách nhiệm hữu hạn "Modish Dapper", địa chỉ pháp lý: Cầu
-              Giấy, Hà Nội, Việt Nam
-            </StyleExplain>
-          </StyleBox25>
-          <StyleBox25>
-            <StyleExplain>
-              Trong sổ đăng ký kinh doanh từ ngày 19 tháng 10 năm 2023, số đăng
-              ký 256476, UNP 14886482
-            </StyleExplain>
-          </StyleBox25>
-          <StyleBox25>
-            <img src={Payment} />
-          </StyleBox25>
-        </StyleContact>
+          <StyleContact>
+            <StyleBox25>
+              <StyleExplain>© 20223 – 2023 Modish Dapper. </StyleExplain>
+              <StyleExplain>Đã đăng ký Bản quyền.</StyleExplain>
+            </StyleBox25>
+            <StyleBox25>
+              <StyleExplain>
+                Công ty trách nhiệm hữu hạn "Modish Dapper", địa chỉ pháp lý:
+                Cầu Giấy, Hà Nội, Việt Nam
+              </StyleExplain>
+            </StyleBox25>
+            <StyleBox25>
+              <StyleExplain>
+                Trong sổ đăng ký kinh doanh từ ngày 19 tháng 10 năm 2023, số
+                đăng ký 256476, UNP 14886482
+              </StyleExplain>
+            </StyleBox25>
+            <StyleBox25>
+              <img src={Payment} />
+            </StyleBox25>
+          </StyleContact>
+        </Container>
       </StyleFooter>
     </>
   );
