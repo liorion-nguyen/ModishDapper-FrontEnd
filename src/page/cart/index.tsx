@@ -90,10 +90,10 @@ export function ProductInCart() {
     return handlePriceProduct() + 10000;
   };
 
-//   function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-//     event.preventDefault();
-//     console.info("You clicked a breadcrumb.");
-//   }
+  //   function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  //     event.preventDefault();
+  //     console.info("You clicked a breadcrumb.");
+  //   }
   const handleCheckout = () => {
     navigate("./checkout");
   };
@@ -210,11 +210,11 @@ export function Transport() {
       <StyleFormTransport method="post">
         <StyleBoxChosse>
           <StyleTrueChosseTransport>
-            <img src={TransportIcon} />
+            <img src={TransportIcon} alt="" />
             <StylePRegular16>Chuyển phát nhanh</StylePRegular16>
           </StyleTrueChosseTransport>
           <StyleChosseTransport>
-            <img src={EmailIcon} />
+            <img src={EmailIcon} alt="" />
             <StylePRegular16>Thư từ</StylePRegular16>
           </StyleChosseTransport>
         </StyleBoxChosse>

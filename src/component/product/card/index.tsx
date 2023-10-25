@@ -1,5 +1,5 @@
 import { Grid, Rating, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Slider from "react-slick";
 import HeartOff from "../../../images/product/icon-love.svg";
 import Shoping from "../../../images/product/cart-4.svg";
@@ -13,11 +13,11 @@ export default function Card({ product }: any) {
   const [sizeProduct, SetSizeProduct] = useState<string>();
   const [total, SetTotal] = useState<number>(1);
 
-  const size = new Set();
+  const size: Set<any> = useMemo(() => new Set(), []);
   const color: string[] = [];
   product?.parameter.map((item: any) => {
     color.push(item.color);
-    return item.size.map((ele: any, index: any) => {
+    return item.size.map((ele: any) => {
       return size.add(ele);
     });
   });
@@ -40,7 +40,7 @@ export default function Card({ product }: any) {
           <Grid>
             <Slider {...settings} className="slide">
               {product?.img.map((item: any) => (
-                <img src={item} width="100%" />
+                <img src={item} width="100%" alt="" />
               ))}
             </Slider>
           </Grid>
