@@ -12,11 +12,20 @@ import Share from "../../../images/product/ant-design_share-alt-outlined.svg";
 import { ItemTransportGrid, SizeProductGrid, TransportGrid } from "./style";
 
 export default function Card({ product }: any) {
-  const [sizeProduct, SetSizeProduct] = useState("xs");
+  const [sizeProduct, SetSizeProduct] = useState<string>();
   const [total, SetTotal] = useState<number>(1);
 
-  const size = ["xs", "s", "m", "l"];
-
+  const size = new Set();
+  const color: string[] = [];
+  product?.parameter.map((item: any) => {
+    color.push(item.color);
+    return item.size.map((ele: any, index: any) => {
+      return size.add(ele);
+    });
+  });
+  useEffect(() => {
+    SetSizeProduct(size.values().next().value);
+  }, [size]);
   const settings = {
     dots: true,
     infinite: true,
@@ -32,9 +41,9 @@ export default function Card({ product }: any) {
         <Grid item xs={6}>
           <Grid>
             <Slider {...settings} className="slide">
-              {/* {data.map((item, index) => ( */}
-              <img src={product?.img} width="100%" />
-              {/* ))} */}
+              {product?.img.map((item: any) => (
+                <img src={item} width="100%" />
+              ))}
             </Slider>
           </Grid>
         </Grid>
@@ -72,14 +81,19 @@ export default function Card({ product }: any) {
             </Grid>
             <Grid item xs={12}>
               <Grid>
-                <Typography>Màu: {product?.color}</Typography>
+                <Typography>
+                  Màu:{" "}
+                  {color.map((value) => (
+                    <>{value} </>
+                  ))}
+                </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12}>
               <Grid>
                 Size:
                 <Grid sx={{ display: "flex", marginTop: "10px" }}>
-                  {size.map((item) => (
+                  {Array.from(size).map((item: any) => (
                     <SizeProductGrid
                       sx={{
                         borderColor:
