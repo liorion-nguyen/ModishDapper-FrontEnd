@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { styled as muiStyled } from "@mui/system";
 
 export const ProductGrid = muiStyled(Grid)(({ theme }) => ({

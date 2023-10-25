@@ -1,8 +1,6 @@
 import { Grid, Rating, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { getProduct } from "../../../Api/product";
-import { useParams } from "react-router-dom";
 import HeartOff from "../../../images/product/icon-love.svg";
 import Shoping from "../../../images/product/cart-4.svg";
 import Transport from "../../../images/product/iconoir_delivery.svg";

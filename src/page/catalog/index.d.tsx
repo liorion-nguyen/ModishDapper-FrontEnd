@@ -26,8 +26,7 @@ import {
   Title,
 } from "./style";
 import { getProducts } from "../../Api/catalog";
-import Product from "../product";
-import { Link } from "react-router-dom";
+
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
     elevation={0}
@@ -148,7 +147,7 @@ export default function Catalog() {
                 {Bestller.map((item) => (
                   <ItemProductGrid item xs={3} textAlign="center">
                     <Grid>
-                      <img src={item.img} style={{ width: "100%" }} />
+                      <img src={item.img} style={{ width: "100%" }} alt="" />
                       <Typography sx={{ marginTop: "10px" }}>
                         {item.text}
                       </Typography>

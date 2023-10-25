@@ -1,7 +1,7 @@
 import { Box, Grid, Link, Typography } from "@mui/material";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
-import { StyleBoxBottomPrice, StyleBoxChosse, StyleBoxSpaceBetween, StyleBreadcrumbs, StyleButtonPrice, StyleCard, StyleChosseTransport, StyleContactPrice, StyleGridPrice, StyleHr, StyleHrPrice, StyleInpHalfTransport, StyleInputTransport, StylePBold16, StylePRegular16, StylePTitlePrice, StyleTextBoldPrice, StyleTextPrice, StyleTitle, StyleTrueChosseTransport } from "../cart/style-mui";
+import { StyleBoxBottomPrice, StyleBoxChosse, StyleBoxSpaceBetween, StyleBreadcrumbs, StyleButtonPrice, StyleCard, StyleChosseTransport, StyleContactPrice, StyleGridPrice, StyleHr, StyleHrPrice, StyleInputTransport, StylePBold16, StylePRegular16, StylePTitlePrice, StyleTextBoldPrice, StyleTextPrice, StyleTitle, StyleTrueChosseTransport } from "../cart/style-mui";
 import { StyleBoxForm, StyleBoxPay, StyleChangeLocationPay } from "./style-mui";
 
 export function Order() {

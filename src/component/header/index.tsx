@@ -49,14 +49,14 @@ export default function Header() {
 
         <StyleListIcon>
           <Box>
-            <img src={User} />
+            <img src={User} alt="" />
           </Box>
           <Box>
-            <img src={Heart} />
+            <img src={Heart} alt="" />
           </Box>
           <Box sx={{ position: "relative" }}>
             <StyleCart data-count="3">
-              <img src={Cart} />
+              <img src={Cart} alt="" />
             </StyleCart>
           </Box>
         </StyleListIcon>

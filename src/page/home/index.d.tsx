@@ -283,64 +283,6 @@ export function NewCollection() {
 }
 
 export function New({ products }: any) {
-  const news = [
-    {
-      name: "ÁO SƠ MI BÒ DÀI TAY",
-      img: "https://down-vn.img.susercontent.com/file/3cbecc49109462c4b2c844a5000380d2",
-      price: 41800,
-      discount: 0,
-      href: "",
-    },
-    {
-      name: "QUẦN BÒ DENIM",
-      img: "https://down-vn.img.susercontent.com/file/aafefe83f29debbbc1c37d86b662b164",
-      price: 392800,
-      discount: 20,
-      href: "",
-    },
-    {
-      name: "QUẦN VẢI ỐNG SUÔNG",
-      img: "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmuooeb1hhwf97",
-      price: 311000,
-      discount: 25,
-      href: "",
-    },
-    {
-      name: "ÁO SƠ MI BÒ DÀI TAY",
-      img: "https://down-vn.img.susercontent.com/file/3cbecc49109462c4b2c844a5000380d2",
-      price: 303000,
-      discount: 15,
-      href: "",
-    },
-    {
-      name: "Áo Cardigan Nam Len Tăm",
-      img: "https://down-vn.img.susercontent.com/file/vn-11134211-7r98o-lm3680kevg7zaf",
-      price: 999000,
-      discount: 99,
-      href: "",
-    },
-    {
-      name: "Sơ Mi Nam Kẻ Caro To",
-      img: "https://down-vn.img.susercontent.com/file/13fe14d6b30ca87616ef157323e91111",
-      price: 100000,
-      discount: 49,
-      href: "",
-    },
-    {
-      name: "QUẦN NGẮN BÒ DENIM",
-      img: "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llvpn20cq3tr60",
-      price: 295000,
-      discount: 20,
-      href: "",
-    },
-    {
-      name: "Sơ Mi Mặt Cười Ngắn tay",
-      img: "https://down-vn.img.susercontent.com/file/262b4b895e670336197fe4d9353dc35c",
-      price: 120000,
-      discount: 0,
-      href: "",
-    },
-  ];
   return (
     <StyleBoxDeal>
       <StyleTitle>NEW</StyleTitle>
