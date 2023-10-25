@@ -121,7 +121,7 @@ export default function Catalog() {
       console.error(e);
     }
   }, []);
-
+  console.log(products);
   return (
     <>
       <Header />
@@ -251,7 +251,11 @@ export default function Catalog() {
                                   overflow: "hidden",
                                 }}
                               >
-                                <img src={item.img} alt="error" width="100%" />
+                                <img
+                                  src={item.img[0]}
+                                  alt="error"
+                                  width="100%"
+                                />
                               </Grid>
                               <Grid
                                 sx={{
@@ -262,9 +266,23 @@ export default function Catalog() {
                               >
                                 <Typography>{item.name}</Typography>
                                 <Grid>
-                                  <ItemProductSpan>M</ItemProductSpan>
-                                  <ItemProductSpan>L</ItemProductSpan>
-                                  <ItemProductSpan>XL</ItemProductSpan>
+                                  {item.parameter.map((ele: any) => {
+                                    const size = new Set();
+
+                                    ele.size.map((value: any) => {
+                                      return size.add(value);
+                                    });
+                                    console.log(size.values());
+                                    return Array.from(size).map(
+                                      (value: any) => {
+                                        return (
+                                          <ItemProductSpan>
+                                            {value}
+                                          </ItemProductSpan>
+                                        );
+                                      }
+                                    );
+                                  })}
                                 </Grid>
                               </Grid>
                               <Grid
@@ -278,7 +296,7 @@ export default function Catalog() {
                                   <Grid
                                     sx={{ color: "black", fontWeight: "bold" }}
                                   >
-                                    ₫{item.money}
+                                    ₫{item.price}
                                   </Grid>
                                   {item.discount > 0 && (
                                     <Grid

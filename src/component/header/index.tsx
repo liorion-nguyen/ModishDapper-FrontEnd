@@ -19,7 +19,7 @@ export default function Header() {
   const items = [
     {
       name: "Trang chủ",
-      href: "",
+      href: "/",
     },
     {
       name: "Flash Sale",
