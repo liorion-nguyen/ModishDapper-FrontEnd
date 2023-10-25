@@ -161,14 +161,14 @@ export default function Login() {
                 />
               </div>
               <div className="pass-link">
-                <a href="#">Forgot password?</a>
+                <a href="##">Forgot password?</a>
               </div>
               <div className="field btn">
                 <div className="btn-layer"></div>
                 <input type="submit" value="Login" onClick={handleSignIn} />
               </div>
               <div className="signup-link">
-                Not a member? <a href="#">Signup now</a>
+                Not a member? <a href="##">Signup now</a>
               </div>
             </form>
           ) : (

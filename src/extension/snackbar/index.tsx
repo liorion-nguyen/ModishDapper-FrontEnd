@@ -1,26 +1,24 @@
-import { SnackbarProvider, useSnackbar } from 'notistack';
-import { Fragment, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { SnackbarProvider, useSnackbar } from "notistack";
+import { Fragment, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function MyApp() {
-    const { enqueueSnackbar } = useSnackbar();
-    const snackbar = useSelector((state: any) => state.snackbar);
+  const { enqueueSnackbar } = useSnackbar();
+  const snackbar = useSelector((state: any) => state.snackbar);
 
-    useEffect(() => {
-        if (snackbar.mode) {
-            enqueueSnackbar(snackbar.content, { variant: snackbar.type || '' });
-        }
-    }, [snackbar]);
+  useEffect(() => {
+    if (snackbar.mode) {
+      enqueueSnackbar(snackbar.content, { variant: snackbar.type || "" });
+    }
+  }, [snackbar, enqueueSnackbar]);
 
-    return (
-        <Fragment></Fragment>
-    );
+  return <Fragment></Fragment>;
 }
 
 export default function IntegrationNotistack() {
-    return (
-        <SnackbarProvider maxSnack={3}>
-            <MyApp />
-        </SnackbarProvider>
-    );
+  return (
+    <SnackbarProvider maxSnack={3}>
+      <MyApp />
+    </SnackbarProvider>
+  );
 }

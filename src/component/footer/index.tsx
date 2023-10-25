@@ -189,7 +189,7 @@ export default function Footer() {
               <Box sx={{ display: "flex", gap: "20px" }}>
                 {social.map((icon) => (
                   <a href={icon.href}>
-                    <img src={icon.icon} />
+                    <img src={icon.icon} alt="" />
                   </a>
                 ))}
               </Box>
@@ -214,7 +214,7 @@ export default function Footer() {
               </StyleExplain>
             </StyleBox25>
             <StyleBox25>
-              <img src={Payment} />
+              <img src={Payment} alt="" />
             </StyleBox25>
           </StyleContact>
         </Container>
