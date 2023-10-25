@@ -1,4 +1,3 @@
-import { Grid } from "@mui/material";
 import Card from "../../component/product/card";
 import { ProductGrid } from "./style";
 import Header from "../../component/header";
@@ -12,7 +11,7 @@ export default function Product() {
   const [product, SetProduct] = useState<any>();
 
   const params = useParams();
-  const productId = params.id;
+  const productId: any = params.id;
   useEffect(() => {
     async function fetchMyAPI() {
       const res = await getProduct(productId);
@@ -23,7 +22,7 @@ export default function Product() {
     } catch (e) {
       console.error(e);
     }
-  }, []);
+  }, [productId]);
   return (
     <>
       <Header />

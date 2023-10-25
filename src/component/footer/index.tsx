@@ -160,7 +160,7 @@ export default function Footer() {
             {contactLine1.map((contact) => (
               <StyleHref href={contact.href}>
                 <StyleIconContact1>
-                  <img src={contact.icon} />
+                  <img src={contact.icon} alt="" />
                 </StyleIconContact1>
                 <StyleText>{contact.content}</StyleText>
               </StyleHref>

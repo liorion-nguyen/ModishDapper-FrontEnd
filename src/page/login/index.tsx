@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./index.css";
 
 import IconFacebook from "../../images/login/icon-facebook.png";
 import IconMail from "../../images/login/icon-mail.png";
 import IconPhone from "../../images/login/icon-phone.png";
-import { SignIn, createUsers } from "../../Api/login";
+import { SignIn } from "../../Api/login";
 import { useDispatch } from "react-redux";
 import { SnackbarActions } from "../../redux/snackbar";
 import { useNavigate } from "react-router-dom";
@@ -62,15 +62,15 @@ export default function Login() {
 
   const handleSignUp = async () => {
     try {
-      let result = await createUsers({
-        username: username,
-        password: password,
-        email: email,
-        fullname: fullname,
-        cfpassword: cfpassword,
-        isAdmin: false,
-        status: true,
-      });
+      // const result = await createUsers({
+      //   username: username,
+      //   password: password,
+      //   email: email,
+      //   fullname: fullname,
+      //   cfpassword: cfpassword,
+      //   isAdmin: false,
+      //   status: true,
+      // });
       dispatch(
         SnackbarActions.OnSnackbar({
           mode: true,
@@ -124,13 +124,13 @@ export default function Login() {
         <div>
           <div className="form-extension">
             <div>
-              <img src={IconFacebook} />
+              <img src={IconFacebook} alt="" />
             </div>
             <div>
-              <img src={IconMail} />
+              <img src={IconMail} alt="" />
             </div>
             <div>
-              <img src={IconPhone} />
+              <img src={IconPhone} alt="" />
             </div>
           </div>
           <div className="note-extension">
