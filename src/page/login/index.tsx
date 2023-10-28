@@ -51,7 +51,7 @@ export default function Login() {
         })
       );
       setTimeout(() => {
-        navigate("../home");
+        navigate("../");
       }, 1000);
     } catch (error) {
       dispatch(

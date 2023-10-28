@@ -111,7 +111,7 @@ export function ProductInCart() {
       <StyleTitle>Cart</StyleTitle>
       <Grid container spacing={4}>
         <Grid item xs={8.5}>
-          {products.map((product, index) => (
+          {products && products.map((product, index) => (
             <Box key={index}>
               <StyleHr />
               <Box sx={{ padding: "30px 0" }}>

@@ -135,6 +135,9 @@ export const StyleBoxImgTop = muiStyled(Box)(({ theme }) => ({
 
 export const StyleImgTop = muiStyled(StyleImgInBox)(({ theme }) => ({
   borderRadius: "12px",
+  ':hover': {
+    cursor: 'pointer'
+  }
 }));
 
 export const StylePNameTop = muiStyled("p")(({ theme }) => ({
@@ -154,6 +157,8 @@ export const StylePPriceTop = muiStyled("p")(({ theme }) => ({
 }));
 
 export const StyleBoxTop = muiStyled("a")(({ theme }) => ({
+  width: '300px',
+  maxWidth: '300px',
   display: "flex !important",
   flexDirection: "column",
   gap: "15px",
@@ -259,6 +264,9 @@ export const StyleImgNew = muiStyled("img")(({ theme }) => ({
   width: "100%",
   height: "400px",
   borderRadius: "12px",
+  ':hover': {
+    cursor: 'pointer'
+  }
 }));
 
 export const StyleNameNew = muiStyled("p")(({ theme }) => ({

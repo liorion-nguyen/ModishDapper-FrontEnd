@@ -54,7 +54,12 @@ import Eye from "../../images/home/topSearch/icon-eye.svg";
 import Love from "../../images/home/topSearch/icon-love.svg";
 import LoveOn from "../../images/home/topSearch/icon-love-on.svg";
 import { useEffect, useState } from "react";
-import { getProducts } from "../../Api/catalog";
+import { getProducts, getProductsDeal, getProductsNews, getProductsTopSearch, updateProduct } from "../../Api/product";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { decodedAT } from "../../Api/user";
+import { useDispatch, useSelector } from "react-redux";
+import { UserActions } from "../../redux/user";
 
 export function Navbar() {
   return (
@@ -71,44 +76,12 @@ export function Navbar() {
   );
 }
 
-export function Deal() {
-  const deals = [
-    {
-      name: "Happy Heart Polo",
-      img: "https://down-vn.img.susercontent.com/file/sg-11134201-23020-k30td5dsienvf7",
-      href: "",
-    },
-    {
-      name: "Jean Basic",
-      img: "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmshonpu9ecfbf",
-      href: "",
-    },
-    {
-      name: "Sweat W Basic",
-      img: "https://down-vn.img.susercontent.com/file/vn-11134201-23030-v32kb9l4jlovf5",
-      href: "",
-    },
-    {
-      name: "Sơ mi thêu LOGO",
-      img: "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmex02uyfun35a",
-      href: "",
-    },
-    {
-      name: "Jacket",
-      img: "https://down-vn.img.susercontent.com/file/sg-11134201-22120-75lyidugp7kv06",
-      href: "",
-    },
-    {
-      name: "Xem tất cả",
-      img: All,
-      href: "",
-    },
-  ];
+export function Deal({ deals }: any) {
   return (
     <StyleBoxDeal>
       <StyleTitle>Deal hot</StyleTitle>
       <StyleContentDeal>
-        {deals.map((deal, index) => (
+        {deals.map((deal: any, index: number) => (
           <StyleItemDeal>
             <StyleADeal href={deal.href}>
               <StyleImgDeal src={deal.img} />
@@ -121,90 +94,39 @@ export function Deal() {
   );
 }
 
-export function TopSearches() {
+export function TopSearches({ topSearchs }: any) {
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: topSearchs.length < 4 ? topSearchs.length : 4,
     slidesToScroll: 1,
   };
-  const topSearches = [
-    {
-      name: "HAPPY HEART POLO",
-      price: 549000,
-      discount: 25,
-      img: "https://down-vn.img.susercontent.com/file/cn-11134207-7qukw-lfkyw6dmlpyw9f",
-      love: true,
-      href: "",
-    },
-    {
-      name: "POLO KẺ",
-      price: 615000,
-      discount: 0,
-      img: "https://down-vn.img.susercontent.com/file/sg-11134201-22120-ud3lh6cbc2kv82",
-      love: true,
-      href: "",
-    },
-    {
-      name: "JEAN BASIC",
-      price: 699000,
-      discount: 10,
-      img: "https://down-vn.img.susercontent.com/file/cn-11134207-7qukw-lfkyw6dmlpyw9f",
-      love: false,
-      href: "",
-    },
-    {
-      name: "SƠ MI DENIM TAY DÀI",
-      price: 1200000,
-      discount: 0,
-      img: "https://down-vn.img.susercontent.com/file/sg-11134201-22120-ud3lh6cbc2kv82",
-      love: false,
-      href: "",
-    },
-    {
-      name: "HAPPY HEART POLO",
-      price: 200000,
-      discount: 50,
-      img: "https://down-vn.img.susercontent.com/file/cn-11134207-7qukw-lfkyw6dmlpyw9f",
-      love: false,
-      href: "",
-    },
-    {
-      name: "HAPPY HEART POLO",
-      price: 179000,
-      discount: 0,
-      img: "https://down-vn.img.susercontent.com/file/sg-11134201-22120-ud3lh6cbc2kv82",
-      love: true,
-      href: "",
-    },
-    {
-      name: "HAPPY HEART POLO",
-      price: 289000,
-      discount: 0,
-      img: "https://down-vn.img.susercontent.com/file/cn-11134207-7qukw-lfkyw6dmlpyw9f",
-      love: false,
-      href: "",
-    },
-    {
-      name: "HAPPY HEART POLO",
-      price: 299000,
-      discount: 15,
-      img: "https://down-vn.img.susercontent.com/file/sg-11134201-22120-ud3lh6cbc2kv82",
-      love: true,
-      href: "",
-    },
-  ];
+
+  const user_id = useSelector((state: any) => state.user.user.user?._id);
+  const navigate = useNavigate();
+  const handleHref = (ref: string) => {
+    navigate(ref)
+  }
+  const handleFavourite = async (id: string, search: any) => {
+    let updatedFavourite;
+    if (search.love.includes(id)) {
+      updatedFavourite = search.love.filter((productId: any) => productId !== id);
+    } else {
+      updatedFavourite = [...search.love, id];
+    }
+    await updateProduct(search.id, { favourite: updatedFavourite });
+  }
 
   return (
     <StyleBoxDeal className="deal">
       <StyleTitle>Tìm kiếm hàng đầu</StyleTitle>
       <div>
         <Slider {...settings}>
-          {topSearches.map((item, index) => (
-            <StyleBoxTop href={item.href} key={index}>
+          {topSearchs.map((item: any, index: number) => (
+            <StyleBoxTop key={index}>
               <StyleBoxImgTop>
-                <StyleImgTop src={item.img} />
+                <StyleImgTop src={item.img[0]} onClick={() => handleHref(item.href)}/>
                 <StyleEleInImgTop>
                   <StyleNumberDiscountTop
                     className={item.discount === 0 ? "hidden" : ""}
@@ -212,7 +134,7 @@ export function TopSearches() {
                     -{item.discount}%
                   </StyleNumberDiscountTop>
                   <StyleBoxIconTop>
-                    <StyleIconLoveTop src={item.love ? LoveOn : Love} />
+                    <StyleIconLoveTop src={item.love.includes(user_id) ? LoveOn : Love} onClick={() => handleFavourite(user_id, item)} />
                     <StyleIconEyeTop src={Eye} />
                   </StyleBoxIconTop>
                 </StyleEleInImgTop>
@@ -282,17 +204,20 @@ export function NewCollection() {
   );
 }
 
-export function New({ products }: any) {
+export function New({ news }: any) {
+  const navigate = useNavigate();
+  const handleHref = (ref: string) => {
+    navigate(ref)
+  }
   return (
     <StyleBoxDeal>
       <StyleTitle>NEW</StyleTitle>
       <Grid container spacing={2} rowSpacing={8}>
-        {products &&
-          products.map(
+        {news.map(
             (newItem: any, index: any) =>
               index < 12 && (
                 <StyleGridNew item xs={3} md={3} key={index}>
-                  <StyleImgNew src={newItem?.img[0]} />
+                  <StyleImgNew src={newItem?.img[0]} onClick={() => handleHref(newItem.href)}/>
                   <StyleNameNew>{newItem?.name}</StyleNameNew>
                   <StyleBoxPriceNew>
                     <StylePriceNew>${newItem?.price}</StylePriceNew>
@@ -383,12 +308,43 @@ export function ModishDapper() {
 }
 
 export default function Home() {
-  const [products, SetProducts] = useState<any>();
+  const [news, SetNews] = useState<any>();
+  const [topSearchs, SetTopSearchs] = useState<any>();
+  const [deals, SetDeals] = useState<any>();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user.user.user);
+
+  useEffect(() => {
+    if (!Cookies.get('modish') || Cookies.get('modish') === undefined) {
+      navigate('/Login');
+    }
+    else {
+      const decoded = async () => {
+        const user = await decodedAT(Cookies.get('modish') || "");
+        if (user.error === "Invalid Access Token") {
+          Cookies.remove('modish');
+          navigate('/Login');
+        }
+        else {
+          dispatch(UserActions.setUser(user))
+        }
+      }
+      decoded();
+    }
+  }, [Cookies.get('modish')]);
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const res = await getProducts();
-      SetProducts(res);
+      const user = await decodedAT(Cookies.get('modish') || "");
+      const resDeal = await getProductsDeal(5);
+      SetDeals(resDeal);
+
+      const resTopSearchs = await getProductsTopSearch(8);
+      SetTopSearchs(resTopSearchs);
+
+      const resNews = await getProductsNews(8);
+      SetNews(resNews);
     }
     try {
       fetchMyAPI();
@@ -401,10 +357,10 @@ export default function Home() {
       <Header />
       <StyleMain>
         <Navbar />
-        <Deal />
-        <TopSearches />
+        <Deal deals={Array.isArray(deals) ? deals : []} />
+        <TopSearches topSearchs={Array.isArray(topSearchs) ? topSearchs : []} />
         <NewCollection />
-        <New products={products} />
+        <New news={Array.isArray(news) ? news : []} />
         <Slide />
         <ModishDapper />
       </StyleMain>
