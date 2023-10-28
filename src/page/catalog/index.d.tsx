@@ -71,6 +71,8 @@ const StyledMenu = styled((props: MenuProps) => (
 }));
 export default function Catalog() {
   const [products, SetProducts] = useState<any>();
+  const [capacity, SetCapacity] = useState<any>(12);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const Bestller = [
     {
@@ -238,9 +240,10 @@ export default function Catalog() {
             <Grid item xs={12}>
               <Grid container spacing={2}>
                 {products &&
-                  products.map(
-                    (item: any, index: any) =>
-                      index < 13 && (
+                  products.map((item: any, index: any) => {
+                    const size = new Set();
+                    if (index < capacity) {
+                      return (
                         <Grid item xs={4}>
                           <Href to={`/product/${item._id}`}>
                             <Grid>
@@ -254,6 +257,7 @@ export default function Catalog() {
                                   src={item.img[0]}
                                   alt="error"
                                   width="100%"
+                                  style={{ height: "350px" }}
                                 />
                               </Grid>
                               <Grid
@@ -265,23 +269,25 @@ export default function Catalog() {
                               >
                                 <Typography>{item.name}</Typography>
                                 <Grid>
-                                  {item.parameter.map((ele: any) => {
-                                    const size = new Set();
-
-                                    ele.size.map((value: any) => {
-                                      return size.add(value);
-                                    });
-                                    console.log(size.values());
-                                    return Array.from(size).map(
-                                      (value: any) => {
-                                        return (
-                                          <ItemProductSpan>
-                                            {value}
-                                          </ItemProductSpan>
+                                  {item.parameter.map(
+                                    (ele: any, index: any) => {
+                                      ele.size.map((value: any) => {
+                                        return size.add(value);
+                                      });
+                                      if (index === item.parameter.length - 1) {
+                                        return Array.from(size).map(
+                                          (value: any) => {
+                                            return (
+                                              <ItemProductSpan>
+                                                {value}
+                                              </ItemProductSpan>
+                                            );
+                                          }
                                         );
                                       }
-                                    );
-                                  })}
+                                      return <></>;
+                                    }
+                                  )}
                                 </Grid>
                               </Grid>
                               <Grid
@@ -318,22 +324,28 @@ export default function Catalog() {
                             </Grid>
                           </Href>
                         </Grid>
-                      )
-                  )}
+                      );
+                    }
+                  })}
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Grid
-                sx={{
-                  textAlign: "center",
-                  background: "black",
-                  color: "white",
-                  borderRadius: "20px",
-                  padding: "10px",
-                }}
-              >
-                Show All
-              </Grid>
+              {products && products.length > Catalog && (
+                <Grid
+                  sx={{
+                    textAlign: "center",
+                    background: "black",
+                    color: "white",
+                    borderRadius: "20px",
+                    padding: "10px",
+                  }}
+                  onClick={() => {
+                    SetCapacity(capacity + 12);
+                  }}
+                >
+                  12 Sản phẩm tiếp theo
+                </Grid>
+              )}
             </Grid>
           </ContainerGridRight>
         </Grid>
