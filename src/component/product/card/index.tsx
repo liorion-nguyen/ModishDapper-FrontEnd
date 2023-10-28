@@ -40,7 +40,7 @@ export default function Card({ product }: any) {
           <Grid>
             <Slider {...settings} className="slide">
               {product?.img.map((item: any) => (
-                <img src={item} width="100%" alt="" />
+                <img src={item} width="100%" height="600px" alt="" />
               ))}
             </Slider>
           </Grid>

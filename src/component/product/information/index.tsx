@@ -6,19 +6,7 @@ export default function Information({ product }: any) {
     <>
       <Grid container>
         <Grid item xs={12}>
-          <TitleInformation>Hello</TitleInformation>
-          <ContentInformation>
-            {product?.describe.replaceAll("\n", "<br/>")}
-          </ContentInformation>
-        </Grid>
-        <Grid item xs={12}>
-          <TitleInformation>Hello</TitleInformation>
-          <ContentInformation>
-            {product?.describe.replaceAll("\n", "<br/>")}
-          </ContentInformation>
-        </Grid>
-        <Grid item xs={12}>
-          <TitleInformation>Hello</TitleInformation>
+          <TitleInformation>Miêu tả</TitleInformation>
           <ContentInformation>
             {product?.describe.replaceAll("\n", "<br/>")}
           </ContentInformation>
