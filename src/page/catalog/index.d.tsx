@@ -114,7 +114,7 @@ export default function Catalog() {
   useEffect(() => {
     async function fetchMyAPI() {
       const res = await getProducts();
-      SetProducts(res);
+      SetProducts(res.data);
     }
     try {
       fetchMyAPI();
@@ -239,7 +239,7 @@ export default function Catalog() {
             </Grid>
             <Grid item xs={12}>
               <Grid container spacing={2}>
-                {products &&
+                {Array.isArray(products) &&
                   products.map((item: any, index: any) => {
                     const size = new Set();
                     if (index < capacity) {
