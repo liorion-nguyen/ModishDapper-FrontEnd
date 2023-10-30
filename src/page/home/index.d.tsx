@@ -82,7 +82,7 @@ export function Deal({ deals }: any) {
       <StyleTitle>Deal hot</StyleTitle>
       <StyleContentDeal>
         {deals.map((deal: any, index: number) => (
-          <StyleItemDeal>
+          <StyleItemDeal key={index}>
             <StyleADeal href={deal.href}>
               <StyleImgDeal src={deal.img} />
             </StyleADeal>
