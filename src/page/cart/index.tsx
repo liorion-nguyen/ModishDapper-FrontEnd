@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, LinearProgress, Typography } from "@mui/material";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
 import {
@@ -53,33 +53,16 @@ import { Link } from "@mui/material";
 
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getPurchase, updatePurchase } from "../../Api/purchase";
 
-export function ProductInCart() {
+export function ProductInCart({ products }: any) {
   const navigate = useNavigate();
-  const products = [
-    {
-      name: "Quần jean dài thẳng vừa vặn màu trắng",
-      color: "white",
-      size: "XS",
-      quantity: 1,
-      price: 999000,
-      image:
-        "https://down-vn.img.susercontent.com/file/vn-11134201-7qukw-lhd4cxpgxipfcd",
-    },
-    {
-      name: "Sơ mi nam basic",
-      color: "grey",
-      size: "L",
-      quantity: 2,
-      price: 100000,
-      image:
-        "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lfzme3skayju1a",
-    },
-  ];
-
+  const user = useSelector((state: any) => state.user.user.user);
   const handlePriceProduct = () => {
     let s = 0;
-    products.map((price) => {
+    products.map((price: any) => {
       s = s + price.price * price.quantity;
       return s;
     });
@@ -94,6 +77,24 @@ export function ProductInCart() {
   //     event.preventDefault();
   //     console.info("You clicked a breadcrumb.");
   //   }
+
+  const handleChangeQuantity = async (id: string, count: number) => {
+    const updatedCart = products.map((item: any) => {
+      if (item.productId === id) {
+        return {
+          ...item,
+          productId: item.productId,
+          quantity: count,
+        };
+      }
+      return item;
+    });
+    await updatePurchase(user._id, {
+      userId: user._id,
+      cart: updatedCart,
+    });
+  };
+
   const handleCheckout = () => {
     navigate("./checkout");
   };
@@ -111,13 +112,13 @@ export function ProductInCart() {
       <StyleTitle>Cart</StyleTitle>
       <Grid container spacing={4}>
         <Grid item xs={8.5}>
-          {products && products.map((product, index) => (
+          {products && products.map((product: any, index: number) => (
             <Box key={index}>
               <StyleHr />
               <Box sx={{ padding: "30px 0" }}>
                 <StyleItemProduct container spacing={5}>
                   <Grid item xs={2}>
-                    <StyleImgProduct src={product.image} />
+                    <StyleImgProduct src={product.img[0]} />
                   </Grid>
                   <StyleBoxContentProduct item xs={6}>
                     <StyleNameProduct>{product.name}</StyleNameProduct>
@@ -145,9 +146,9 @@ export function ProductInCart() {
                   <StyleSettingProduct item xs={3}>
                     <StylePriceProduct>{product.price} VNĐ</StylePriceProduct>
                     <StyleAddMinuProduct>
-                      <Minu />
+                      <Minu onClick={() => handleChangeQuantity(product.productId, product.quantity - 1)} />
                       <p>{product.quantity}</p>
-                      <Add />
+                      <Add onClick={() => handleChangeQuantity(product.productId, product.quantity + 1)} />
                     </StyleAddMinuProduct>
                   </StyleSettingProduct>
                   <Grid item xs={1}>
@@ -243,13 +244,18 @@ export function Transport() {
 }
 
 export default function Cart() {
+  const user = useSelector((state: any) => state.user.user.user);
+  const products = useSelector((state: any) => state.purchase.purchase.cart);
+
   return (
     <Box className="card">
       <Header />
-      <StyleCard>
-        <ProductInCart />
-        <Transport />
-      </StyleCard>
+      {
+        products && products.length !== 0 ? (<StyleCard>
+          <ProductInCart products={Array.isArray(products) ? products : []} />
+          <Transport />
+        </StyleCard>) : <LinearProgress />
+      }
       <Footer />
     </Box>
   );

@@ -157,8 +157,8 @@ export default function Footer() {
       <StyleFooter>
         <Container>
           <StyleContact>
-            {contactLine1.map((contact) => (
-              <StyleHref href={contact.href}>
+            {contactLine1.map((contact, index) => (
+              <StyleHref href={contact.href} key={index}>
                 <StyleIconContact1>
                   <img src={contact.icon} alt="" />
                 </StyleIconContact1>
@@ -168,15 +168,15 @@ export default function Footer() {
           </StyleContact>
 
           <StyleContact>
-            {contactLine2.map((contact) => (
-              <StyleBox25>
+            {contactLine2.map((contact, index) => (
+              <StyleBox25 key={index}>
                 <StyleTitle>{contact.title}</StyleTitle>
                 <Box
                   sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
                 >
-                  {contact.content.map((content) => (
+                  {contact.content.map((content, index) => (
                     <Box>
-                      <StyleHref2 href={content.href}>
+                      <StyleHref2 href={content.href} key={index}>
                         {content.explain}
                       </StyleHref2>
                     </Box>
@@ -187,8 +187,8 @@ export default function Footer() {
             <StyleBox25>
               <StyleTitle>Mạng xã hội</StyleTitle>
               <Box sx={{ display: "flex", gap: "20px" }}>
-                {social.map((icon) => (
-                  <a href={icon.href}>
+                {social.map((icon, index) => (
+                  <a href={icon.href} key={index}>
                     <img src={icon.icon} alt="" />
                   </a>
                 ))}
