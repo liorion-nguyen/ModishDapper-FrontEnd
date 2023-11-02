@@ -54,8 +54,7 @@ import { Link } from "@mui/material";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getPurchase, updatePurchase } from "../../Api/purchase";
+import { updatePurchase } from "../../Api/purchase";
 
 export function ProductInCart({ products }: any) {
   const navigate = useNavigate();
@@ -112,52 +111,67 @@ export function ProductInCart({ products }: any) {
       <StyleTitle>Cart</StyleTitle>
       <Grid container spacing={4}>
         <Grid item xs={8.5}>
-          {products && products.map((product: any, index: number) => (
-            <Box key={index}>
-              <StyleHr />
-              <Box sx={{ padding: "30px 0" }}>
-                <StyleItemProduct container spacing={5}>
-                  <Grid item xs={2}>
-                    <StyleImgProduct src={product.img[0]} />
-                  </Grid>
-                  <StyleBoxContentProduct item xs={6}>
-                    <StyleNameProduct>{product.name}</StyleNameProduct>
-                    <StyleParaProduct>
-                      <StyleBoxParaProduct>
-                        <StyleTextParaProduct>Màu sắc:</StyleTextParaProduct>
-                        <StyleContebtParaProduct>
-                          {product.color}
-                        </StyleContebtParaProduct>
-                      </StyleBoxParaProduct>
-                      <StyleBoxParaProduct>
-                        <StyleTextParaProduct>Kích cỡ:</StyleTextParaProduct>
-                        <StyleContebtParaProduct>
-                          {product.size}
-                        </StyleContebtParaProduct>
-                      </StyleBoxParaProduct>
-                      <StyleBoxParaProduct>
-                        <StyleTextParaProduct>Số lượng:</StyleTextParaProduct>
-                        <StyleContebtParaProduct>
-                          {product.quantity}
-                        </StyleContebtParaProduct>
-                      </StyleBoxParaProduct>
-                    </StyleParaProduct>
-                  </StyleBoxContentProduct>
-                  <StyleSettingProduct item xs={3}>
-                    <StylePriceProduct>{product.price} VNĐ</StylePriceProduct>
-                    <StyleAddMinuProduct>
-                      <Minu onClick={() => handleChangeQuantity(product.productId, product.quantity - 1)} />
-                      <p>{product.quantity}</p>
-                      <Add onClick={() => handleChangeQuantity(product.productId, product.quantity + 1)} />
-                    </StyleAddMinuProduct>
-                  </StyleSettingProduct>
-                  <Grid item xs={1}>
-                    <Delete />
-                  </Grid>
-                </StyleItemProduct>
+          {products &&
+            products.map((product: any, index: number) => (
+              <Box key={index}>
+                <StyleHr />
+                <Box sx={{ padding: "30px 0" }}>
+                  <StyleItemProduct container spacing={5}>
+                    <Grid item xs={2}>
+                      <StyleImgProduct src={product.img[0]} />
+                    </Grid>
+                    <StyleBoxContentProduct item xs={6}>
+                      <StyleNameProduct>{product.name}</StyleNameProduct>
+                      <StyleParaProduct>
+                        <StyleBoxParaProduct>
+                          <StyleTextParaProduct>Màu sắc:</StyleTextParaProduct>
+                          <StyleContebtParaProduct>
+                            {product.color}
+                          </StyleContebtParaProduct>
+                        </StyleBoxParaProduct>
+                        <StyleBoxParaProduct>
+                          <StyleTextParaProduct>Kích cỡ:</StyleTextParaProduct>
+                          <StyleContebtParaProduct>
+                            {product.size}
+                          </StyleContebtParaProduct>
+                        </StyleBoxParaProduct>
+                        <StyleBoxParaProduct>
+                          <StyleTextParaProduct>Số lượng:</StyleTextParaProduct>
+                          <StyleContebtParaProduct>
+                            {product.quantity}
+                          </StyleContebtParaProduct>
+                        </StyleBoxParaProduct>
+                      </StyleParaProduct>
+                    </StyleBoxContentProduct>
+                    <StyleSettingProduct item xs={3}>
+                      <StylePriceProduct>{product.price} VNĐ</StylePriceProduct>
+                      <StyleAddMinuProduct>
+                        <Minu
+                          onClick={() =>
+                            handleChangeQuantity(
+                              product.productId,
+                              product.quantity - 1
+                            )
+                          }
+                        />
+                        <p>{product.quantity}</p>
+                        <Add
+                          onClick={() =>
+                            handleChangeQuantity(
+                              product.productId,
+                              product.quantity + 1
+                            )
+                          }
+                        />
+                      </StyleAddMinuProduct>
+                    </StyleSettingProduct>
+                    <Grid item xs={1}>
+                      <Delete />
+                    </Grid>
+                  </StyleItemProduct>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
           <StyleHr />
         </Grid>
         <StyleGridPrice item xs={3.5}>
@@ -244,18 +258,20 @@ export function Transport() {
 }
 
 export default function Cart() {
-  const user = useSelector((state: any) => state.user.user.user);
+  // const user = useSelector((state: any) => state.user.user.user);
   const products = useSelector((state: any) => state.purchase.purchase.cart);
 
   return (
     <Box className="card">
       <Header />
-      {
-        products && products.length !== 0 ? (<StyleCard>
+      {products && products.length !== 0 ? (
+        <StyleCard>
           <ProductInCart products={Array.isArray(products) ? products : []} />
           <Transport />
-        </StyleCard>) : <LinearProgress />
-      }
+        </StyleCard>
+      ) : (
+        <LinearProgress />
+      )}
       <Footer />
     </Box>
   );

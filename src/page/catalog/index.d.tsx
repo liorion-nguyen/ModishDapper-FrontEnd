@@ -326,6 +326,7 @@ export default function Catalog() {
                         </Grid>
                       );
                     }
+                    return <></>;
                   })}
               </Grid>
             </Grid>
