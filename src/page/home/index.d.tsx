@@ -49,12 +49,16 @@ import {
   StyleASlide,
 } from "./style-mui";
 
-import All from "../../images/home/deal/seen-all-sale.png";
 import Eye from "../../images/home/topSearch/icon-eye.svg";
 import Love from "../../images/home/topSearch/icon-love.svg";
 import LoveOn from "../../images/home/topSearch/icon-love-on.svg";
 import { useEffect, useState } from "react";
-import { getProducts, getProductsDeal, getProductsNews, getProductsTopSearch, updateProduct } from "../../Api/product";
+import {
+  getProductsDeal,
+  getProductsNews,
+  getProductsTopSearch,
+  updateProduct,
+} from "../../Api/product";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { decodedAT } from "../../Api/user";
@@ -106,17 +110,19 @@ export function TopSearches({ topSearchs }: any) {
   const user_id = useSelector((state: any) => state.user.user.user?._id);
   const navigate = useNavigate();
   const handleHref = (ref: string) => {
-    navigate(ref)
-  }
+    navigate(ref);
+  };
   const handleFavourite = async (id: string, search: any) => {
     let updatedFavourite;
     if (search.love.includes(id)) {
-      updatedFavourite = search.love.filter((productId: any) => productId !== id);
+      updatedFavourite = search.love.filter(
+        (productId: any) => productId !== id
+      );
     } else {
       updatedFavourite = [...search.love, id];
     }
     await updateProduct(search.id, { favourite: updatedFavourite });
-  }
+  };
 
   return (
     <StyleBoxDeal className="deal">
@@ -126,7 +132,10 @@ export function TopSearches({ topSearchs }: any) {
           {topSearchs.map((item: any, index: number) => (
             <StyleBoxTop key={index}>
               <StyleBoxImgTop>
-                <StyleImgTop src={item.img[0]} onClick={() => handleHref(item.href)}/>
+                <StyleImgTop
+                  src={item.img[0]}
+                  onClick={() => handleHref(item.href)}
+                />
                 <StyleEleInImgTop>
                   <StyleNumberDiscountTop
                     className={item.discount === 0 ? "hidden" : ""}
@@ -134,7 +143,10 @@ export function TopSearches({ topSearchs }: any) {
                     -{item.discount}%
                   </StyleNumberDiscountTop>
                   <StyleBoxIconTop>
-                    <StyleIconLoveTop src={item.love.includes(user_id) ? LoveOn : Love} onClick={() => handleFavourite(user_id, item)} />
+                    <StyleIconLoveTop
+                      src={item.love.includes(user_id) ? LoveOn : Love}
+                      onClick={() => handleFavourite(user_id, item)}
+                    />
                     <StyleIconEyeTop src={Eye} />
                   </StyleBoxIconTop>
                 </StyleEleInImgTop>
@@ -207,29 +219,32 @@ export function NewCollection() {
 export function New({ news }: any) {
   const navigate = useNavigate();
   const handleHref = (ref: string) => {
-    navigate(ref)
-  }
+    navigate(ref);
+  };
   return (
     <StyleBoxDeal>
       <StyleTitle>NEW</StyleTitle>
       <Grid container spacing={2} rowSpacing={8}>
         {news.map(
-            (newItem: any, index: any) =>
-              index < 12 && (
-                <StyleGridNew item xs={3} md={3} key={index}>
-                  <StyleImgNew src={newItem?.img[0]} onClick={() => handleHref(newItem.href)}/>
-                  <StyleNameNew>{newItem?.name}</StyleNameNew>
-                  <StyleBoxPriceNew>
-                    <StylePriceNew>${newItem?.price}</StylePriceNew>
-                    {newItem?.discount > 0 && (
-                      <StyleDiscountNew>
-                        {newItem?.discount}% GIẢM
-                      </StyleDiscountNew>
-                    )}
-                  </StyleBoxPriceNew>
-                </StyleGridNew>
-              )
-          )}
+          (newItem: any, index: any) =>
+            index < 12 && (
+              <StyleGridNew item xs={3} md={3} key={index}>
+                <StyleImgNew
+                  src={newItem?.img[0]}
+                  onClick={() => handleHref(newItem.href)}
+                />
+                <StyleNameNew>{newItem?.name}</StyleNameNew>
+                <StyleBoxPriceNew>
+                  <StylePriceNew>${newItem?.price}</StylePriceNew>
+                  {newItem?.discount > 0 && (
+                    <StyleDiscountNew>
+                      {newItem?.discount}% GIẢM
+                    </StyleDiscountNew>
+                  )}
+                </StyleBoxPriceNew>
+              </StyleGridNew>
+            )
+        )}
       </Grid>
       <StyleBoxMoreTop>
         <StyleButtonMoreTop>Xem thêm </StyleButtonMoreTop>
@@ -313,30 +328,28 @@ export default function Home() {
   const [deals, SetDeals] = useState<any>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user.user.user);
+  // const user = useSelector((state: any) => state.user.user.user);
 
   useEffect(() => {
-    if (!Cookies.get('modish') || Cookies.get('modish') === undefined) {
-      navigate('/Login');
-    }
-    else {
+    if (!Cookies.get("modish") || Cookies.get("modish") === undefined) {
+      navigate("/Login");
+    } else {
       const decoded = async () => {
-        const user = await decodedAT(Cookies.get('modish') || "");
+        const user = await decodedAT(Cookies.get("modish") || "");
         if (user.error === "Invalid Access Token") {
-          Cookies.remove('modish');
-          navigate('/Login');
+          Cookies.remove("modish");
+          navigate("/Login");
+        } else {
+          dispatch(UserActions.setUser(user));
         }
-        else {
-          dispatch(UserActions.setUser(user))
-        }
-      }
+      };
       decoded();
     }
-  }, [Cookies.get('modish')]);
+  }, [Cookies.get("modish")]);
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const user = await decodedAT(Cookies.get('modish') || "");
+      // const user = await decodedAT(Cookies.get("modish") || "");
       const resDeal = await getProductsDeal(5);
       SetDeals(resDeal);
 
