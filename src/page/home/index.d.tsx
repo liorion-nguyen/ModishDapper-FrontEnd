@@ -220,7 +220,7 @@ export function New({ news }: any) {
                   <StyleImgNew src={newItem?.img[0]} onClick={() => handleHref(newItem.href)}/>
                   <StyleNameNew>{newItem?.name}</StyleNameNew>
                   <StyleBoxPriceNew>
-                    <StylePriceNew>${newItem?.price}</StylePriceNew>
+                    <StylePriceNew>{newItem?.price} VNĐ</StylePriceNew>
                     {newItem?.discount > 0 && (
                       <StyleDiscountNew>
                         {newItem?.discount}% GIẢM
