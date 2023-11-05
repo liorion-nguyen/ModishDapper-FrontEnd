@@ -13,10 +13,12 @@ import {
   SizeProductGrid,
   TransportGrid,
 } from "./style";
-import { addOrder } from "../../../Api/order";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addUpdatePurchase } from "../../../Api/purchase";
+import { SnackbarActions } from "../../../redux/snackbar";
 
 export default function Card({ product }: any) {
+  const dispatch = useDispatch();
   const [sizeProduct, SetSizeProduct] = useState<string>();
   const [colorProduct, SetColorProduct] = useState<string>();
 
@@ -46,22 +48,41 @@ export default function Card({ product }: any) {
   };
   const user = useSelector((state: any) => state.user.user.user);
   const handleOrder = async () => {
+    if (!(colorProduct && sizeProduct && total > 0)) {
+      dispatch(
+        SnackbarActions.OnSnackbar({
+          mode: true,
+          content: "Must fill in all information",
+          type: "error",
+        })
+      );
+      return;
+    }
     const data = {
       userId: user?._id,
-      cart: [
-        {
-          productId: product?._id,
-          name: product.name,
-          img: product.img,
-          price: product.price,
-          discount: product.discount,
-          color: colorProduct,
-          size: sizeProduct,
-          quantity: total,
-        },
-      ],
+      cart:
+      {
+        productId: product?._id,
+        name: product.name,
+        img: product.img,
+        price: product.price,
+        discount: product.discount,
+        color: colorProduct,
+        size: sizeProduct,
+        quantity: total,
+      },
     };
-    await addOrder(data);
+
+    const update = await addUpdatePurchase(data);
+    if (update) {
+      dispatch(
+        SnackbarActions.OnSnackbar({
+          mode: true,
+          content: "Add product success",
+          type: "success",
+        })
+      );
+    }
   };
   const colorSize =
     colorProduct &&
@@ -219,13 +240,12 @@ export default function Card({ product }: any) {
                         color: "#ffffff",
                         padding: "10px",
                       }}
+                      onClick={() => {
+                        handleOrder();
+                      }}
                     >
                       <img src={Shoping} alt="" />
-                      <ItemTransportGrid
-                        onClick={() => {
-                          handleOrder();
-                        }}
-                      >
+                      <ItemTransportGrid>
                         Add Order
                       </ItemTransportGrid>
                     </TransportGrid>

@@ -53,11 +53,13 @@ import { Link } from "@mui/material";
 
 import "./index.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { updatePurchase } from "../../Api/purchase";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUpdatePurchase, updatePurchase } from "../../Api/purchase";
+import { SnackbarActions } from "../../redux/snackbar";
 
 export function ProductInCart({ products }: any) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user.user);
   const handlePriceProduct = () => {
     let s = 0;
@@ -71,11 +73,6 @@ export function ProductInCart({ products }: any) {
   const handleTotal = () => {
     return handlePriceProduct() + 10000;
   };
-
-  //   function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-  //     event.preventDefault();
-  //     console.info("You clicked a breadcrumb.");
-  //   }
 
   const handleChangeQuantity = async (id: string, count: number) => {
     const updatedCart = products.map((item: any) => {
@@ -97,6 +94,35 @@ export function ProductInCart({ products }: any) {
   const handleCheckout = () => {
     navigate("./checkout");
   };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const result = await deleteUpdatePurchase({
+        id: id,
+        userId: user._id
+      });
+
+      if (result) {
+        dispatch(
+          SnackbarActions.OnSnackbar({
+            mode: true,
+            content: "Delete product success",
+            type: "success",
+          })
+        );
+      }
+    } catch (error) {
+      console.error();
+      dispatch(
+        SnackbarActions.OnSnackbar({
+          mode: true,
+          content: `Error deleting product:, ${error}`,
+          type: "error",
+        })
+      );
+    }
+  }
+
 
   return (
     <Box>
@@ -166,7 +192,7 @@ export function ProductInCart({ products }: any) {
                       </StyleAddMinuProduct>
                     </StyleSettingProduct>
                     <Grid item xs={1}>
-                      <Delete />
+                      <Delete onClick={() => handleDelete(product.productId)} />
                     </Grid>
                   </StyleItemProduct>
                 </Box>

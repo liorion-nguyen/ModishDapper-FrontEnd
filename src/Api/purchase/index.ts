@@ -18,4 +18,14 @@ export const getPurchase = async (id: string) => {
 export const updatePurchase = async (id: string, content: any) => {
     const data = await request('put', content, `purchase/${id}`)
     return data;
-  }
+}
+
+export const addUpdatePurchase = async (content: any) => {
+  const data = await request('put', content, `purchase/add`)
+  return data;
+}
+
+export const deleteUpdatePurchase = async (content: any) => {
+  const data = await request('put', content, `purchase/delete`)
+  return data;
+}
