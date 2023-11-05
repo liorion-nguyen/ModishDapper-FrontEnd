@@ -226,25 +226,22 @@ export function New({ news }: any) {
       <StyleTitle>NEW</StyleTitle>
       <Grid container spacing={2} rowSpacing={8}>
         {news.map(
-          (newItem: any, index: any) =>
-            index < 12 && (
-              <StyleGridNew item xs={3} md={3} key={index}>
-                <StyleImgNew
-                  src={newItem?.img[0]}
-                  onClick={() => handleHref(newItem.href)}
-                />
-                <StyleNameNew>{newItem?.name}</StyleNameNew>
-                <StyleBoxPriceNew>
-                  <StylePriceNew>${newItem?.price}</StylePriceNew>
-                  {newItem?.discount > 0 && (
-                    <StyleDiscountNew>
-                      {newItem?.discount}% GIẢM
-                    </StyleDiscountNew>
-                  )}
-                </StyleBoxPriceNew>
-              </StyleGridNew>
-            )
-        )}
+            (newItem: any, index: any) =>
+              index < 12 && (
+                <StyleGridNew item xs={3} md={3} key={index}>
+                  <StyleImgNew src={newItem?.img[0]} onClick={() => handleHref(newItem.href)}/>
+                  <StyleNameNew>{newItem?.name}</StyleNameNew>
+                  <StyleBoxPriceNew>
+                    <StylePriceNew>{newItem?.price} VNĐ</StylePriceNew>
+                    {newItem?.discount > 0 && (
+                      <StyleDiscountNew>
+                        {newItem?.discount}% GIẢM
+                      </StyleDiscountNew>
+                    )}
+                  </StyleBoxPriceNew>
+                </StyleGridNew>
+              )
+          )}
       </Grid>
       <StyleBoxMoreTop>
         <StyleButtonMoreTop>Xem thêm </StyleButtonMoreTop>

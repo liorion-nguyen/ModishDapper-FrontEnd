@@ -18,16 +18,18 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     const decoded = async () => {
-      const user = await decodedAT(Cookies.get('modish') || "");
-      const purchase = await getPurchase(user.user._id);
-      
-      if (user.error === "Invalid Access Token") {
-        Cookies.remove('modish');
+      if (Cookies.get('modish')) {
+        const user = await decodedAT(Cookies.get('modish') || "");
+        if (user.error === "Invalid Access Token") {
+          Cookies.remove('modish');
+        }
+        else {
+          const purchase = await getPurchase(user.user._id);
+          dispatch(UserActions.setUser(user))
+          dispatch(PurchaseActions.setPurchase(purchase))
+        }
       }
-      else {
-        dispatch(UserActions.setUser(user))
-        dispatch(PurchaseActions.setPurchase(purchase))
-      }
+
     }
     decoded();
   }, [Cookies.get('modish')]);
