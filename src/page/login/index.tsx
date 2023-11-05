@@ -4,12 +4,11 @@ import "./index.css";
 import IconFacebook from "../../images/login/icon-facebook.png";
 import IconMail from "../../images/login/icon-mail.png";
 import IconPhone from "../../images/login/icon-phone.png";
-import { SignIn, createUsers } from "../../Api/login";
+import { SignIn } from "../../Api/login";
 import { useDispatch } from "react-redux";
 import { SnackbarActions } from "../../redux/snackbar";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { createPurchase } from "../../Api/purchase";
 
 export default function Login() {
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -38,7 +37,7 @@ export default function Login() {
         username: Inusername,
         password: Inpassword,
       });
-      
+
       Cookies.set("modish", result.accessToken, {
         expires: 1,
         secure: true,
@@ -64,18 +63,18 @@ export default function Login() {
 
   const handleSignUp = async () => {
     try {
-      const result = await createUsers({
-        username: username,
-        password: password,
-        email: email,
-        fullname: fullname,
-        cfpassword: cfpassword,
-        isAdmin: false,
-        status: true,
-      });
-      
-      const purchase = await createPurchase({userId: result._id, cart: []})
-      
+      // const result = await createUsers({
+      //   username: username,
+      //   password: password,
+      //   email: email,
+      //   fullname: fullname,
+      //   cfpassword: cfpassword,
+      //   isAdmin: false,
+      //   status: true,
+      // });
+
+      // const purchase = await createPurchase({userId: result._id, cart: []})
+
       dispatch(
         SnackbarActions.OnSnackbar({
           mode: true,

@@ -1,4 +1,4 @@
-import { Grid, Rating, Typography } from "@mui/material";
+import { Box, Grid, Rating, Typography } from "@mui/material";
 import { useEffect, useState, useMemo } from "react";
 import Slider from "react-slick";
 import HeartOff from "../../../images/product/icon-love.svg";
@@ -7,23 +7,34 @@ import Transport from "../../../images/product/iconoir_delivery.svg";
 import Car from "../../../images/product/iconoir_delivery-truck.svg";
 import Share from "../../../images/product/ant-design_share-alt-outlined.svg";
 
-import { ItemTransportGrid, SizeProductGrid, TransportGrid } from "./style";
+import {
+  ItemTransportGrid,
+  ProductGrid,
+  SizeProductGrid,
+  TransportGrid,
+} from "./style";
+import { addOrder } from "../../../Api/order";
+import { useSelector } from "react-redux";
 
 export default function Card({ product }: any) {
   const [sizeProduct, SetSizeProduct] = useState<string>();
+  const [colorProduct, SetColorProduct] = useState<string>();
+
   const [total, SetTotal] = useState<number>(1);
 
   const size: Set<any> = useMemo(() => new Set(), []);
-  const color: string[] = [];
+  const color: Set<any> = useMemo(() => new Set(), []);
   product?.parameter.map((item: any) => {
-    color.push(item.color);
+    color.add(item.color);
     return item.size.map((ele: any) => {
       return size.add(ele);
     });
   });
   useEffect(() => {
     SetSizeProduct(size.values().next().value);
-  }, [size]);
+    SetColorProduct(color.values().next().value);
+  }, [size, color]);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -33,9 +44,32 @@ export default function Card({ product }: any) {
     autoplay: true,
     autoplaySpeed: 2000,
   };
+  const user = useSelector((state: any) => state.user.user.user);
+  const handleOrder = async () => {
+    const data = {
+      userId: user?._id,
+      cart: [
+        {
+          productId: product?._id,
+          name: product.name,
+          img: product.img,
+          price: product.price,
+          discount: product.discount,
+          color: colorProduct,
+          size: sizeProduct,
+          quantity: total,
+        },
+      ],
+    };
+    await addOrder(data);
+  };
+  const colorSize =
+    colorProduct &&
+    product.parameter.filter((product: any) => product.color == colorProduct)[0]
+      .size;
   return (
     <>
-      <Grid container columns={13} spacing={2}>
+      <ProductGrid container columns={13} spacing={2}>
         <Grid item xs={6}>
           <Grid>
             <Slider {...settings} className="slide">
@@ -73,7 +107,7 @@ export default function Card({ product }: any) {
             <Grid item xs={12}>
               <Grid>
                 <Typography>
-                  {(product?.money * product?.discount) / 100}
+                  {(product?.price * (100 - product?.discount)) / 100} VND
                 </Typography>
               </Grid>
             </Grid>
@@ -81,8 +115,15 @@ export default function Card({ product }: any) {
               <Grid>
                 <Typography>
                   Màu:{" "}
-                  {color.map((value) => (
-                    <>{value} </>
+                  {Array.from(color).map((value) => (
+                    <Box
+                      sx={{ color: value === colorProduct ? "red" : "while" }}
+                      onClick={() => {
+                        SetColorProduct(value);
+                      }}
+                    >
+                      {value}
+                    </Box>
                   ))}
                 </Typography>
               </Grid>
@@ -96,6 +137,10 @@ export default function Card({ product }: any) {
                       sx={{
                         borderColor:
                           sizeProduct === item ? "#000000" : "#DBE5F1",
+                        display:
+                          colorSize && colorSize.includes(item)
+                            ? "block"
+                            : "none",
                       }}
                       onClick={() => {
                         SetSizeProduct(item);
@@ -119,11 +164,18 @@ export default function Card({ product }: any) {
                 >
                   <TransportGrid>
                     <img src={Car} alt="" />
-                    <ItemTransportGrid>text</ItemTransportGrid>
+                    <ItemTransportGrid>
+                      Chuyển phát nhanh đến tận nhà - miễn phí cho đơn hàng từ
+                      ₫2.000.000 <br />
+                      Thử trước khi mua trong vòng 15 phút
+                    </ItemTransportGrid>
                   </TransportGrid>
                   <TransportGrid>
                     <img src={Transport} alt="" />
-                    <ItemTransportGrid>text</ItemTransportGrid>
+                    <ItemTransportGrid>
+                      Vận chuyển hoả tốc <br />
+                      Không được thử
+                    </ItemTransportGrid>
                   </TransportGrid>
                 </Grid>
               </Grid>
@@ -169,7 +221,13 @@ export default function Card({ product }: any) {
                       }}
                     >
                       <img src={Shoping} alt="" />
-                      <ItemTransportGrid>text</ItemTransportGrid>
+                      <ItemTransportGrid
+                        onClick={() => {
+                          handleOrder();
+                        }}
+                      >
+                        Add Order
+                      </ItemTransportGrid>
                     </TransportGrid>
                   </Grid>
                 </Grid>
@@ -177,7 +235,7 @@ export default function Card({ product }: any) {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </ProductGrid>
     </>
   );
 }
