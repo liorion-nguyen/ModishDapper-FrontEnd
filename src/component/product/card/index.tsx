@@ -60,8 +60,7 @@ export default function Card({ product }: any) {
     }
     const data = {
       userId: user?._id,
-      cart:
-      {
+      cart: {
         productId: product?._id,
         name: product.name,
         img: product.img,
@@ -105,13 +104,13 @@ export default function Card({ product }: any) {
             <Grid item xs={12}>
               <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                <Typography>hello</Typography>
+                <Typography>2 Dánh Giá</Typography>
               </Grid>
             </Grid>
             <Grid item xs={12}>
               <Grid container>
                 <Grid item xs={8}>
-                  <Typography>hello</Typography>
+                  <Typography>{product?.name}</Typography>
                 </Grid>
                 <Grid item xs={4}>
                   <Grid sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -245,9 +244,7 @@ export default function Card({ product }: any) {
                       }}
                     >
                       <img src={Shoping} alt="" />
-                      <ItemTransportGrid>
-                        Add Order
-                      </ItemTransportGrid>
+                      <ItemTransportGrid>Add Order</ItemTransportGrid>
                     </TransportGrid>
                   </Grid>
                 </Grid>
