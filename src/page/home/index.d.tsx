@@ -66,15 +66,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { UserActions } from "../../redux/user";
 
 export function Navbar() {
+  const users = useSelector((state: any) => state.user.user.user);
   return (
     <StyleNavBar>
       <StyleImgNav src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lj29vqf6o83w95" />
       <StyleNavLeft>
         <StylePNav>Chào mừng bạn đến với trang mua bán trực tuyến</StylePNav>
-        <StyleRefNav>
-          <StyleANavFirst>Bạn đã có tài khoản</StyleANavFirst>
-          <StyleANavLast>Đăng kí ngay</StyleANavLast>
-        </StyleRefNav>
+        {
+          users ? (<StyleANavFirst onClick={() => {
+            window.location.href = "/login";
+            Cookies.remove('modish');
+          }}>Đăng xuất</StyleANavFirst>) : (
+            <StyleRefNav>
+              <StyleANavFirst onClick={() => {
+                window.location.href = "/login";
+              }}>Bạn đã có tài khoản</StyleANavFirst>
+              <StyleANavLast>Đăng kí ngay</StyleANavLast>
+            </StyleRefNav>
+          )
+        }
       </StyleNavLeft>
     </StyleNavBar>
   );
@@ -226,22 +236,22 @@ export function New({ news }: any) {
       <StyleTitle>NEW</StyleTitle>
       <Grid container spacing={2} rowSpacing={8}>
         {news.map(
-            (newItem: any, index: any) =>
-              index < 12 && (
-                <StyleGridNew item xs={3} md={3} key={index}>
-                  <StyleImgNew src={newItem?.img[0]} onClick={() => handleHref(newItem.href)}/>
-                  <StyleNameNew>{newItem?.name}</StyleNameNew>
-                  <StyleBoxPriceNew>
-                    <StylePriceNew>{newItem?.price} VNĐ</StylePriceNew>
-                    {newItem?.discount > 0 && (
-                      <StyleDiscountNew>
-                        {newItem?.discount}% GIẢM
-                      </StyleDiscountNew>
-                    )}
-                  </StyleBoxPriceNew>
-                </StyleGridNew>
-              )
-          )}
+          (newItem: any, index: any) =>
+            index < 12 && (
+              <StyleGridNew item xs={3} md={3} key={index}>
+                <StyleImgNew src={newItem?.img[0]} onClick={() => handleHref(newItem.href)} />
+                <StyleNameNew>{newItem?.name}</StyleNameNew>
+                <StyleBoxPriceNew>
+                  <StylePriceNew>{newItem?.price} VNĐ</StylePriceNew>
+                  {newItem?.discount > 0 && (
+                    <StyleDiscountNew>
+                      {newItem?.discount}% GIẢM
+                    </StyleDiscountNew>
+                  )}
+                </StyleBoxPriceNew>
+              </StyleGridNew>
+            )
+        )}
       </Grid>
       <StyleBoxMoreTop>
         <StyleButtonMoreTop>Xem thêm </StyleButtonMoreTop>
@@ -325,11 +335,10 @@ export default function Home() {
   const [deals, SetDeals] = useState<any>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const user = useSelector((state: any) => state.user.user.user);
 
   useEffect(() => {
     if (!Cookies.get("modish") || Cookies.get("modish") === undefined) {
-      navigate("/Login");
+      // navigate("/Login");
     } else {
       const decoded = async () => {
         const user = await decodedAT(Cookies.get("modish") || "");
