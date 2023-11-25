@@ -74,7 +74,7 @@ export default function Login() {
         status: true,
       });
 
-      const purchase = await createPurchase({userId: result._id, cart: []})
+      const purchase = await createPurchase({ userId: result._id, cart: [] })
 
       dispatch(
         SnackbarActions.OnSnackbar({
@@ -94,141 +94,151 @@ export default function Login() {
   };
 
   return (
-    <div className="wrapper">
-      <div className="title-text">
-        <div className={`title ${isLoginForm ? "login" : ""}`}>Login Form</div>
-        <div className={`title ${!isLoginForm ? "signup" : ""}`}>
-          Signup Form
-        </div>
-      </div>
-      <div className="form-container">
-        <div className="slide-controls">
-          <input
-            type="radio"
-            name="slide"
-            id="login"
-            checked={isLoginForm}
-            onChange={handleLoginClick}
-          />
-          <input
-            type="radio"
-            name="slide"
-            id="signup"
-            checked={!isLoginForm}
-            onChange={handleSignupClick}
-          />
-          <label htmlFor="login" className={`slide login`}>
-            Login
-          </label>
-          <label htmlFor="signup" className={`slide signup`}>
-            Signup
-          </label>
-          <div className="slider-tab"></div>
-        </div>
-
-        <div>
-          <div className="form-extension">
-            <div>
-              <img src={IconFacebook} alt="" />
-            </div>
-            <div>
-              <img src={IconMail} alt="" />
-            </div>
-            <div>
-              <img src={IconPhone} alt="" />
-            </div>
-          </div>
-          <div className="note-extension">
-            <hr />
-            <p>Sign In with</p>
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <div className="wrapper">
+        <div className="title-text">
+          <div className={`title ${isLoginForm ? "login" : ""}`}>Login Form</div>
+          <div className={`title ${!isLoginForm ? "signup" : ""}`}>
+            Signup Form
           </div>
         </div>
+        <div className="form-container">
+          <div className="slide-controls">
+            <input
+              type="radio"
+              name="slide"
+              id="login"
+              checked={isLoginForm}
+              onChange={handleLoginClick}
+            />
+            <input
+              type="radio"
+              name="slide"
+              id="signup"
+              checked={!isLoginForm}
+              onChange={handleSignupClick}
+            />
+            <label htmlFor="login" className={`slide login`}>
+              Login
+            </label>
+            <label htmlFor="signup" className={`slide signup`}>
+              Signup
+            </label>
+            <div className="slider-tab"></div>
+          </div>
 
-        <div className="form-inner">
-          {isLoginForm ? (
-            <form action="#" className="login">
-              <div className="field">
-                <input
-                  type="text"
-                  placeholder="Email Or Username"
-                  value={Inusername}
-                  onChange={(e) => setInUsername(e.target.value)}
-                  required
-                />
+          <div>
+            <div className="form-extension">
+              <div>
+                <img src={IconFacebook} alt="" />
               </div>
-              <div className="field">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={Inpassword}
-                  onChange={(e) => setInPassword(e.target.value)}
-                  required
-                />
+              <div>
+                <img src={IconMail} alt="" />
               </div>
-              <div className="pass-link">
-                <a href="##">Forgot password?</a>
+              <div>
+                <img src={IconPhone} alt="" />
               </div>
-              <div className="field btn">
-                <div className="btn-layer"></div>
-                <input type="submit" value="Login" onClick={handleSignIn} />
-              </div>
-              <div className="signup-link">
-                Not a member? <a href="##">Signup now</a>
-              </div>
-            </form>
-          ) : (
-            <form action="#" className="signup">
-              <div className="field">
-                <input
-                  type="text"
-                  placeholder="Email Address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="field">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  value={fullname}
-                  onChange={(e) => setFullname(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="field">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="field">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="field">
-                <input
-                  type="password"
-                  placeholder="Confirm password"
-                  value={cfpassword}
-                  onChange={(e) => setCfpassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="field btn">
-                <div className="btn-layer"></div>
-                <input type="submit" value="Signup" onClick={handleSignUp} />
-              </div>
-            </form>
-          )}
+            </div>
+            <div className="note-extension">
+              <hr />
+              <p>Sign In with</p>
+            </div>
+          </div>
+
+          <div className="form-inner">
+            {isLoginForm ? (
+              <form action="#" className="login">
+                <div className="field">
+                  <input
+                    type="text"
+                    placeholder="Email Or Username"
+                    value={Inusername}
+                    onChange={(e) => setInUsername(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="field">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={Inpassword}
+                    onChange={(e) => setInPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="pass-link">
+                  <a href="##">Forgot password?</a>
+                </div>
+                <div className="field btn">
+                  <div className="btn-layer"></div>
+                  <input type="submit" value="Login" onClick={handleSignIn} />
+                </div>
+                <div className="signup-link">
+                  Not a member? <a href="##">Signup now</a>
+                </div>
+              </form>
+            ) : (
+              <form action="#" className="signup">
+                <div className="field">
+                  <input
+                    type="text"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="field">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    value={fullname}
+                    onChange={(e) => setFullname(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="field">
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="field">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="field">
+                  <input
+                    type="password"
+                    placeholder="Confirm password"
+                    value={cfpassword}
+                    onChange={(e) => setCfpassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="field btn">
+                  <div className="btn-layer"></div>
+                  <input type="submit" value="Signup" onClick={handleSignUp} />
+                </div>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </div>
