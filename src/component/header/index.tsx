@@ -29,7 +29,7 @@ export default function Header() {
     },
     {
       name: "Sản phẩm",
-      href: "",
+      href: "/catalog",
     },
     {
       name: "Bộ sưu tập",
