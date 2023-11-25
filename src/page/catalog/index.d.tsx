@@ -13,6 +13,10 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import img from "../../images/catalog/Ellipse 18.png";
+import somi from "../../images/catalog/somi.webp";
+import short from "../../images/catalog/short.jpg";
+import jean from "../../images/catalog/jean.webp";
+
 import Header from "../../component/header";
 import Footer from "../../component/footer";
 import {
@@ -80,16 +84,16 @@ export default function Catalog() {
       text: "Polo Nam Thêu",
     },
     {
-      img: img,
-      text: "Polo Nam Thêu",
+      img: somi,
+      text: "Áo Sơ Mi",
     },
     {
-      img: img,
-      text: "Polo Nam Thêu",
+      img: short,
+      text: "Quần Short",
     },
     {
-      img: img,
-      text: "Polo Nam Thêu",
+      img: jean,
+      text: "Quần Jean",
     },
   ];
   const category = [
